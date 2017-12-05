@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codeReading.busi.dal.iface.user.IBadgeDao">
+	
+	<sql id="column"> badgeid,badgename,description,state,icon,modtime,intime </sql>
+	
+	<sql id="key_where"> where badgeid=#{badgeid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="Badge" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_badge <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="Badge" parameterType="Badge">
+		select <include refid="column"/> from scr.t_badge 
+		<where>
+			<if test="badgeid != null &amp;&amp; badgeid != ''"> and badgeid=#{badgeid}</if>
+			<if test="badgename != null &amp;&amp; badgename != ''"> and badgename=#{badgename}</if>
+			<if test="description != null &amp;&amp; description != ''"> and description=#{description}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="icon != null &amp;&amp; icon != ''"> and icon=#{icon}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="Badge" parameterType="Badge">
+		select <include refid="column"/> from scr.t_badge
+	</select>
+	
+	<select id="findByPage" resultType="Badge" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_badge
+		<where>
+			<if test="param.badgeid != null &amp;&amp; param.badgeid != ''"> and badgeid=#{param.badgeid}</if>
+			<if test="param.badgename != null &amp;&amp; param.badgename != ''"> and badgename=#{param.badgename}</if>
+			<if test="param.description != null &amp;&amp; param.description != ''"> and description=#{param.description}</if>
+			<if test="param.state != null &amp;&amp; param.state != ''"> and state=#{param.state}</if>
+			<if test="param.icon != null &amp;&amp; param.icon != ''"> and icon=#{param.icon}</if>
+			<if test="param.modtime != null"> and modtime=#{param.modtime}</if>
+			<if test="param.intime != null"> and intime=#{param.intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="Badge" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_badge
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_badge
+		<where>
+			<if test="badgeid != null &amp;&amp; badgeid != ''"> and badgeid=#{badgeid}</if>
+			<if test="badgename != null &amp;&amp; badgename != ''"> and badgename=#{badgename}</if>
+			<if test="description != null &amp;&amp; description != ''"> and description=#{description}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="icon != null &amp;&amp; icon != ''"> and icon=#{icon}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="Badge">
+		insert into scr.t_badge (
+		<trim suffixOverrides=",">
+			<if test="badgeid != null &amp;&amp; badgeid != ''">badgeid,</if>
+			<if test="badgename != null &amp;&amp; badgename != ''">badgename,</if>
+			<if test="description != null &amp;&amp;description != ''"> description,</if>
+			<if test="state != null &amp;&amp; state != ''">state,</if>
+			<if test="icon != null &amp;&amp; icon != ''">icon,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="badgeid != null &amp;&amp; badgeid != ''">#{badgeid},</if>
+			<if test="badgename != null &amp;&amp; badgename != ''">#{badgename},</if>
+			<if test="description != null &amp;&amp;description != ''"> #{description},</if>
+			<if test="state != null &amp;&amp; state != ''">#{state},</if>
+			<if test="icon != null &amp;&amp; icon != ''">#{icon},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="Badge">
+		update scr.t_badge 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="badgeid != null &amp;&amp; badgeid != ''">badgeid=#{badgeid},</if>
+			<if test="badgename != null &amp;&amp; badgename != ''">badgename=#{badgename},</if>
+			<if test="description != null &amp;&amp;description != ''"> description=#{description},</if>
+			<if test="state != null &amp;&amp; state != ''">state=#{state},</if>
+			<if test="icon != null &amp;&amp; icon != ''">icon=#{icon},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 自定义操作 -->
+	
+</mapper>

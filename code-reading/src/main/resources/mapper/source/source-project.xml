@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!--scr.t_source_project 映射文件 vision:1.0.1 -->
+<mapper namespace="com.codeReading.busi.dal.iface.source.ISourceProjectDao">
+	
+	<sql id="column"> projectid,name,description,logo,uploader,sourcepath,datapath,projectpath,state,modtime,intime </sql>
+	
+	<sql id="key_where"> where projectid=#{projectid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="SourceProject" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_source_project <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="SourceProject" parameterType="SourceProject">
+		select <include refid="column"/> from scr.t_source_project 
+		<where>
+			<if test="projectid != null &amp;&amp; projectid != ''"> and projectid=#{projectid}</if>
+			<if test="name != null &amp;&amp; name != ''"> and name=#{name}</if>
+			<if test="description != null &amp;&amp; description != ''"> and description=#{description}</if>
+			<if test="logo != null &amp;&amp; logo != ''"> and logo=#{logo}</if>
+			<if test="uploader != null &amp;&amp; uploader != ''"> and uploader=#{uploader}</if>
+			<if test="sourcepath != null &amp;&amp; sourcepath != ''"> and sourcepath=#{sourcepath}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+			<if test="datapath != null &amp;&amp; datapath != ''"> and datapath=#{datapath}</if>
+			<if test="projectpath != null &amp;&amp; projectpath != ''"> and projectpath=#{projectpath}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="SourceProject" parameterType="SourceProject">
+		select <include refid="column"/> from scr.t_source_project where state = '2'
+		order by intime DESC
+	</select>
+	
+	<select id="findByPage" resultType="SourceProject" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_source_project
+		<where>
+			<if test="param.projectid != null &amp;&amp; param.projectid != ''"> and projectid=#{param.projectid}</if>
+			<if test="param.name != null &amp;&amp; param.name != ''"> and name=#{param.name}</if>
+			<if test="param.description != null &amp;&amp; param.description != ''"> and description=#{param.description}</if>
+			<if test="param.logo != null &amp;&amp; param.logo != ''"> and logo=#{param.logo}</if>
+			<if test="param.uploader != null &amp;&amp; param.uploader != ''"> and uploader=#{param.uploader}</if>
+			<if test="param.sourcepath != null &amp;&amp; param.sourcepath != ''"> and sourcepath=#{param.sourcepath}</if>
+			<if test="param.state != null &amp;&amp; param.state != ''"> and state=#{param.state}</if>
+			<if test="param.modtime != null"> and modtime=#{param.modtime}</if>
+			<if test="param.intime != null"> and intime=#{param.intime}</if>
+			<if test="param.datapath != null &amp;&amp; param.datapath != ''"> and datapath=#{param.datapath}</if>
+			<if test="param.projectpath != null &amp;&amp; param.projectpath != ''"> and projectpath=#{param.projectpath}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''"> ${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="SourceProject" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_source_project
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''"> ${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_source_project
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="SourceProject">
+		insert into scr.t_source_project (
+		<trim suffixOverrides=",">
+			<if test="projectid != null &amp;&amp; projectid != ''">projectid,</if>
+			<if test="name != null &amp;&amp; name != ''">name,</if>
+			<if test="description != null &amp;&amp; description != ''">description,</if>
+			<if test="logo != null &amp;&amp; logo != ''">logo,</if>
+			<if test="uploader != null &amp;&amp; uploader != ''">uploader,</if>
+			<if test="sourcepath != null &amp;&amp; sourcepath != ''">sourcepath,</if>
+			<if test="state != null &amp;&amp; state != ''">state,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+			<if test="datapath != null &amp;&amp; datapath != ''">datapath,</if>
+			<if test="projectpath != null &amp;&amp; projectpath != ''">projectpath,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="projectid != null &amp;&amp; projectid != ''">#{projectid},</if>
+			<if test="name != null &amp;&amp; name != ''">#{name},</if>
+			<if test="description != null &amp;&amp; description != ''">#{description},</if>
+			<if test="logo != null &amp;&amp; logo != ''">#{logo},</if>
+			<if test="uploader != null &amp;&amp; uploader != ''">#{uploader},</if>
+			<if test="sourcepath != null &amp;&amp; sourcepath != ''">#{sourcepath},</if>
+			<if test="state != null &amp;&amp; state != ''">#{state},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+			<if test="datapath != null &amp;&amp; datapath != ''">#{datapath},</if>
+			<if test="projectpath != null &amp;&amp; projectpath != ''">#{projectpath},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="SourceProject">
+		update scr.t_source_project 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="projectid != null &amp;&amp; projectid != ''">projectid=#{projectid},</if>
+			<if test="name != null &amp;&amp; name != ''">name=#{name},</if>
+			<if test="description != null &amp;&amp; description != ''">description=#{description},</if>
+			<if test="logo != null &amp;&amp; logo != ''">logo=#{logo},</if>
+			<if test="uploader != null &amp;&amp; uploader != ''">uploader=#{uploader},</if>
+			<if test="sourcepath != null &amp;&amp; sourcepath != ''">sourcepath=#{sourcepath},</if>
+			<if test="state != null &amp;&amp; state != ''">state=#{state},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+			<if test="datapath != null &amp;&amp; datapath != ''">datapath=#{datapath},</if>
+			<if test="projectpath != null &amp;&amp; projectpath != ''">projectpath=#{projectpath},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="SourceProject">
+		delete from scr.t_source_project <include refid="key_where"/>
+	</delete>
+	
+	<!-- 贡献者排名 -->
+	<select id="getProjectContributors" resultType="com.codeReading.busi.po.ContributorPO" parameterType="java.lang.String">
+		select u.userid, u.nickname, base1.sumsupport as support
+		from(select base.userid, sum(base.support) sumsupport
+			from (
+				select userid, support 
+				from scr.t_article 
+				where projectid = #{projectid}
+				union all
+				select an.userid, an.support 
+				from scr.t_annotation an , scr.t_source_file sf 
+				where an.fileid = sf.fileid and sf.owner = #{projectid}
+			) base
+			group by base.userid
+		)base1 LEFT JOIN scr.t_user u on u.userid=base1.userid
+		ORDER BY sumsupport DESC LIMIT 5
+	</select>	
+	
+	<!-- 自定义操作 -->
+	<select id="findByUserid" resultType="SourceProject" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_source_project
+		where uploader = #{userid}
+		ORDER BY modtime DESC;
+	</select>	
+	
+	<select id="findUserSourcesByPage" resultType="SourceProject" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_source_project 
+		where uploader = #{param.userid} and state = '2'
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>	
+	
+	<select id="findUserSourcesJoinStatistics" resultType="map" parameterType="QueryBean">
+		select sp.projectid, sp.name,sp.intime, sps.watchcount, sps.annotationcount 
+		from scr.t_source_project sp left join scr.t_source_project_statistics sps on sp.projectid = sps.projectid
+		where sp.uploader = #{param.userid} and sp.state = '2' 
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>	
+</mapper>

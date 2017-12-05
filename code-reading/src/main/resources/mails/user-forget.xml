@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>【问津】问津验证码:{code}(泄露有风险)</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3"/>
+    <meta name="description" content="this is my page"/>
+    <meta name="content-type" content="text/html; charset=UTF-8"/>
+    
+  </head>
+  
+  <body>
+           您正在修改{pwdtype}密码，验证码:{code}(泄露有风险)。<br/>
+  </body>
+</html>

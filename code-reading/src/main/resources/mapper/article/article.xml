@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codeReading.busi.dal.iface.article.IArticleDao">
+	
+	<sql id="column"> articleid,projectid,userid,title,summary,content,busistate,state,weight,pageview,support,remark,publishtime,modtime,intime </sql>
+	
+	<sql id="key_where"> where articleid=#{articleid} </sql>
+	
+	<!-- 查询 -->
+	<select id="get" resultType="Article" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_article <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="Article" parameterType="Article">
+		select <include refid="column"/> from scr.t.t_article 
+		<where>
+			<if test="articleid != null &amp;&amp; articleid != ''"> and articleid=#{articleid}</if>
+			<if test="projectid != null &amp;&amp; projectid != ''"> and projectid=#{projectid}</if>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="title != null &amp;&amp; title != ''"> and title=#{title}</if>
+			<if test="summary != null &amp;&amp; summary != ''"> and lower(summary)=lower(#{summary})</if>
+			<if test="content != null &amp;&amp; content != ''"> and content=#{content}</if>
+			<if test="busistate != null &amp;&amp; busistate != ''"> and busistate ~ #{busistate}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state ~ #{state}</if>
+			<if test="weight != null"> and weight=#{weight}</if>
+			<if test="pageview != null"> and pageview=#{pageview}</if>
+			<if test="support != null"> and support=#{support}</if>
+			<if test="remark != null &amp;&amp; remark != ''"> and remark=#{remark}</if>
+			<if test="publishtime != null"> and publishtime=#{publishtime}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="Article" parameterType="Article">
+		select <include refid="column"/> from scr.t_article
+	</select>
+	
+	<select id="findByPage" resultType="Article" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_article
+		<where>
+			<if test="param.articleid != null &amp;&amp; param.articleid != ''"> and articleid=#{param.articleid}</if>
+			<if test="param.projectid != null &amp;&amp; param.projectid != ''"> and projectid=#{param.projectid}</if>
+			<if test="param.userid != null &amp;&amp; param.userid != ''"> and userid=#{param.userid}</if>
+			<if test="param.title != null &amp;&amp; param.title != ''"> and title ~ #{param.title}</if>
+			<if test="param.summary != null &amp;&amp; param.summary != ''"> and summary=#{param.summary}</if>
+			<if test="param.content != null &amp;&amp; param.content != ''"> and content=#{param.content}</if>
+			<if test="param.busistate != null &amp;&amp; param.busistate != ''"> and busistate ~ #{param.busistate}</if>
+			<if test="param.state != null &amp;&amp; param.state != ''"> and state ~ #{param.state}</if>
+			<if test="param.weight != null"> and weight=#{param.weight}</if>
+			<if test="param.pageview != null"> and pageview=#{param.pageview}</if>
+			<if test="param.support != null"> and support=#{param.support}</if>
+			<if test="param.remark != null &amp;&amp; param.remark != ''"> and remark=#{param.remark}</if>
+			<if test="param.publishtime != null"> and publishtime=#{param.publishtime}</if>
+			<if test="param.modtime != null"> and modtime=#{param.modtime}</if>
+			<if test="param.intime != null"> and intime=#{param.intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="Article" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_article
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_article
+		<where>
+			<if test="articleid != null &amp;&amp; articleid != ''"> and articleid=#{articleid}</if>
+			<if test="projectid != null &amp;&amp; projectid != ''"> and projectid=#{projectid}</if>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="title != null &amp;&amp; title != ''"> and title=#{title}</if>
+			<if test="summary != null &amp;&amp; summary != ''"> and lower(summary)=lower(#{summary})</if>
+			<if test="content != null &amp;&amp; content != ''"> and content=#{content}</if>
+			<if test="busistate != null &amp;&amp; busistate != ''"> and busistate ~ #{busistate}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state ~ #{state}</if>
+			<if test="weight != null"> and weight=#{weight}</if>
+			<if test="pageview != null"> and pageview=#{pageview}</if>
+			<if test="support != null"> and support=#{support}</if>
+			<if test="remark != null &amp;&amp; remark != ''"> and remark=#{remark}</if>
+			<if test="publishtime != null"> and publishtime=#{publishtime}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="Article">
+		insert into scr.t_article (
+		<trim suffixOverrides=",">
+			<if test="articleid != null &amp;&amp; articleid != ''">articleid,</if>
+			<if test="projectid != null &amp;&amp; projectid != ''">projectid,</if>
+			<if test="userid != null &amp;&amp; userid != ''">userid,</if>
+			<if test="title != null &amp;&amp; title != ''">title,</if>
+			<if test="summary != null &amp;&amp; summary != ''">summary,</if>
+			<if test="content != null &amp;&amp; content != ''">content,</if>
+			<if test="busistate != null &amp;&amp; busistate != ''">busistate,</if>
+			<if test="state != null &amp;&amp; state != ''">state,</if>
+			<if test="weight != null">weight,</if>
+			<if test="pageview != null">pageview,</if>
+			<if test="support != null">support,</if>
+			<if test="remark != null &amp;&amp; remark != ''">remark,</if>
+			<if test="publishtime != null">publishtime,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="articleid != null &amp;&amp; articleid != ''">#{articleid},</if>
+			<if test="projectid != null &amp;&amp; projectid != ''">#{projectid},</if>
+			<if test="userid != null &amp;&amp; userid != ''">#{userid},</if>
+			<if test="title != null &amp;&amp; title != ''">#{title},</if>
+			<if test="summary != null &amp;&amp; summary != ''">#{summary},</if>
+			<if test="content != null &amp;&amp; content != ''">#{content},</if>
+			<if test="busistate != null &amp;&amp; busistate != ''">#{busistate},</if>
+			<if test="state != null &amp;&amp; state != ''">#{state},</if>
+			<if test="weight != null">#{weight},</if>
+			<if test="pageview != null">#{pageview},</if>
+			<if test="support != null">#{support},</if>
+			<if test="remark != null &amp;&amp; remark != ''">#{remark},</if>
+			<if test="publishtime != null">#{publishtime},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="Article">
+		update scr.t_article 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="userid != null &amp;&amp; userid != ''">userid=#{userid},</if>
+			<if test="projectid != null &amp;&amp; projectid != ''">projectid=#{projectid},</if>
+			<if test="title != null &amp;&amp; title != ''">title=#{title},</if>
+			<if test="summary != null &amp;&amp; summary != ''">summary=#{summary},</if>
+			<if test="content != null &amp;&amp; content != ''">content=#{content},</if>
+			<if test="busistate != null &amp;&amp; busistate != ''">busistate=#{busistate},</if>
+			<if test="state != null &amp;&amp; state != ''">state=#{state},</if>
+			<if test="weight != null">weight=#{weight},</if>
+			<if test="pageview != null">pageview=#{pageview},</if>
+			<if test="support != null">support=#{support},</if>
+			<if test="remark != null &amp;&amp; remark != ''">remark=#{remark},</if>
+			<if test="publishtime != null">publishtime=#{publishtime},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 自定义操作 -->
+	<select id="findArticleByPage" resultType="Article" parameterType="QueryBean">
+		select 
+			articleid,projectid,userid,title,summary,weight,pageview,support,publishtime 
+		from 
+			scr.t_article
+		<where>
+			<if test="param.keywords != null &amp;&amp; param.keywords != ''"> and 
+				(title like '%'||#{param.keywords}||'%' or 
+				 summary like '%'||#{param.keywords}||'%' or 
+				 content like '%'||#{param.keywords}||'%' 
+				 )
+			</if>
+			and a.busistate='2' and a.state='2' 
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="getByProjectId" resultType="Article" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_article
+		where projectid=#{projectid} and busistate='2' and state='2'
+		order by support desc
+	</select>
+	
+	<select id="findProjectArticlesByPage" resultType="Article" parameterType="QueryBean">
+		select 
+			articleid,projectid,userid,title,summary,weight,pageview,support,publishtime 
+		from 
+			scr.t_article
+		<where>
+			<if test="param.projectid != null &amp;&amp; param.projectid != ''"> and projectid=#{param.projectid}
+			</if>
+			and busistate='2' and state='2' 
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="findAllArticleByPage" resultType="Article" parameterType="QueryBean">
+		select 
+			articleid,projectid,userid,title,summary,weight,pageview,support,publishtime 
+		from 
+			scr.t_article where busistate='2' and state='2'
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="findOtherArticles" resultType="Article" parameterType="map">
+		select articleid,projectid,userid,title,pageview,support,publishtime from scr.t_article 
+		<where>
+			<if test="articleid != null &amp;&amp; articleid != ''"> and articleid&lt;&gt;#{articleid}</if>
+			<if test="projectid != null &amp;&amp; userid != ''"> and projectid=#{projectid} </if>
+			and busistate='2' and state='2'
+		</where>
+		order by support desc
+	</select>
+	
+	<select id="findTheUserArticleList" resultType="Article" parameterType="java.lang.String">
+		select articleid,projectid,userid,title,summary,pageview,support,publishtime from scr.t_article 
+		where userid=#{userid} and busistate='2' and state='2' order by publishtime desc
+	</select>
+	
+	<select id="findMyArticleByPage" resultType="Article" parameterType="QueryBean">
+		select articleid,projectid,userid,title,summary,weight,pageview,busistate,support,publishtime from scr.t_article 
+		where userid = #{param.userid} and state='2' 
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<update id="updateArticleBusistateByUser" parameterType="map">
+		update scr.t_article set busistate=#{busistate} where 
+			userid=#{userid} and busistate!=#{busistate} and state=#{orgstate}
+	</update>
+	
+	<update id="updateArticleBusistate" parameterType="map">
+		update scr.t_article set busistate=#{busistate} where articleid=#{articleid}
+	</update>
+	
+	<update id="updateArticleState" parameterType="map">
+		update scr.t_article set state=#{state} where articleid=#{articleid}
+	</update>
+</mapper>

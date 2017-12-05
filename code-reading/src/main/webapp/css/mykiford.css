@@ -1,0 +1,1715 @@
+/***********************************************************/
+/***********              我的问津左侧             ***********/
+/**********************************************************/
+.MK-leftBox{
+	width: 280px;
+	float: left;
+	display: inline;
+	margin-top: 98px;
+}
+.MK-leftBox1{
+	width: 280px;
+	float: left;
+	display: inline;
+	position: fixed;
+	margin-top: 98px;
+}
+/**********用户信息**********/
+.MK-leftBox .userMsg{
+	border: 1px solid #e5e5e5;
+	background: #fafafa;
+	padding: 30px 0px;
+}
+
+.userHead{
+	border: 5px solid #e5e5e5;
+	width: 150px;
+	height: 150px;
+	box-sizing: border-box;
+	border-radius: 50%;
+	margin: 0 auto;
+	position: relative;
+}
+
+.userHead label.changeImg{
+	width:0px;
+	height:0px;
+	display: block;
+	overflow: hidden;
+	-webkit-transition: -webkit-transform .3s ease-in, background .3s ease-in;
+	-moz-transition: -moz-transform .3s ease-in, background .3s ease-in;
+	-o-transition: -o-transform .3s ease-in, background .3s ease-in;
+	transition: transform .3s ease-in, background .3s ease-in;
+}
+.userHead:hover label.changeImg{
+	-webkit-transform: rotate(0deg) scale(1);
+	-moz-transform: rotate(0deg) scale(1);
+	-o-transform: rotate(0deg) scale(1);
+	-transform: rotate(0deg) scale(1);
+	display: block;
+	width: 140px;
+	height: 140px;
+	border-radius: 50%;
+	background: rgba(255,77,0,0.8);
+	z-index: 1000;
+	position: absolute;
+	cursor: pointer;
+	color: #fff;
+	line-height: 140px;
+	text-align: center;
+	font-size: 1.6em;
+}
+.userHead img{
+	width: 140px;
+	height: 140px;
+	box-sizing: border-box;
+	border-radius: 50%;
+}
+.userMsg h2{
+	font-size: 20px;
+	height: 30px;
+	text-align: center;
+	display: block;
+	margin: 0 20px;
+	margin-top: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/**********导航**********/
+.MK-leftBox .MKguid{
+	border: 1px solid #e5e5e5;
+	border-top: 0px;
+	background: #fff;
+}
+.MKguid a{
+	height: 54px;
+	line-height: 54px;
+	display: block;
+	font-size: 1.6em;
+	text-align: center;
+	color: #666;
+	position: relative;
+	margin: 1px;
+	margin-top: 0px;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+
+.MKguid a:hover{
+	background: #f5f5f5;
+}
+.MKguid a.active{
+	color: #fff;
+	background: #ff4d00;
+}
+.MKguid a .newAlertThree{
+	min-width: 18px;
+	height: 18px;
+	background: #ff3c00;
+	line-height: 18px;
+	color: #fff;
+	text-align: center;
+	position: absolute;
+	border-radius: 9px;
+	padding: 0 4px;
+	font-size: .8em;
+	right: 15px;
+	top:18px;
+}
+
+
+
+/***********************************************************/
+/***********              我的问津右侧             ***********/
+/**********************************************************/
+.MK-rightBox{
+	width: 890px;
+	margin-left: 30px;
+	float: right;
+	display: inline;
+	margin-top: 98px;
+}
+
+.MKright-inner{
+	border: 1px solid #e5e5e5;
+	background: #fff;
+	position: relative;
+	min-height: 600px;
+}
+.MKright-inner .mark{
+	position: absolute;
+	width: 150px;
+	height: 140px;
+	right: 40px;
+	top: 60px;
+}
+.MKright-inner .mark.pass{
+	background: url(../images/mark.png) right center no-repeat;
+}
+.MKright-title{
+	border-bottom: 1px solid #e5e5e5;
+	height: 88px;
+	line-height: 88px;
+	font-size: 28px;
+	padding:0 40px;
+	color:#666;
+}
+
+.MKright-title .open-close{
+	float: right;
+	display: inline;
+	text-align: center;
+	width: 110px;
+	height: 30px;
+	line-height: 30px;
+	position: relative;
+	color: #666;
+	margin-top: 28px;
+	background: #f60;
+	box-shadow: 0px 0px 3px rgba(0,0,0,0.3) inset;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.MKright-title .open-close .flow-block{
+	position: absolute;
+	cursor: pointer;
+	width: 40px;
+	height: 26px;
+	left: 2px;
+	top:2px;
+	background:url(../images/pull-signal.png) center center no-repeat #f8f8f8;
+	border: 1px solid #fff;
+	box-sizing: border-box;
+	box-shadow: 0px 0px 2px rgba(0,0,0,0.2);
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.MKright-title .open-close .close-block{
+	width: 70px;
+	height: 30px;
+	color: #fff;
+	font-size: 12px;
+	float: left;
+	display: none;
+}
+.MKright-title .open-close .open-block{
+	float: right;
+	display: inline;
+	font-size: 12px;
+	color: #fff;
+	width: 70px;
+	height: 30px;
+}
+.MKright-title .open-close.close{
+	background: #e5e5e5;
+}
+.MKright-title .open-close.close .flow-block{
+	left: 68px;
+}
+.MKright-title .open-close.close .close-block{
+	color: #999;
+	display: block;
+}
+.MKright-title .open-close.close .open-block{
+	color: #999;
+	display:none;
+}
+
+
+.MKright-search{
+	width: 260px;
+	height: 36px;
+	border: 1px solid #ddd;
+	position: relative;
+	float: right;
+	display: inline;
+	margin-top: 26px;
+	margin-right: -10px;
+}
+.MKright-search em.placeholder{
+	position: absolute;
+	top:0px;
+	left: 0px;
+	z-index: 900;
+	height: 36px;
+	padding-left: 3%;
+	font-size: 12px;
+	color: #666;
+	line-height: 36px;
+	color: #bbb;
+	cursor: text;
+	background: none;
+}
+.MKright-search input[type=text]{
+	height: 36px;
+	line-height: 36px;
+	border: 0px;
+	background: #fff;
+	width: 94%;
+	padding:0 3%;
+	top: 0px;
+	left: 0px;
+	position: absolute;
+}
+.MKright-search button{
+	background: url(../images/guid-searchBtn-gray.png) center center no-repeat #f5f5f5;
+	cursor: pointer;
+	width: 36px;
+	height: 36px;
+	border: 0;
+	position: absolute;
+	z-index: 1000;
+	right: 0px;
+	top:0px;
+}
+.MKright-search .clear{
+	width: 20px;
+	height: 20px;
+	background: url(../images/close-tips.png) center center no-repeat #e5e5e5;
+	background-size: 50%;
+	position: absolute;
+	right: 42px;
+	top:8px;
+	z-index: 9999;
+	cursor: pointer;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.MKright-search .clear:hover{
+	background-color: #ccc;
+}
+
+.nullList{
+	font-size: 2em;
+	color: #999;
+	text-align: center;
+	width: 100%;
+	line-height: 24px;
+	padding-top: 150px;
+	min-height: 380px;
+}
+.nullList a.more{
+	font-size: 14px;
+	line-height: 28px;
+	display: block;
+	padding: 0 15px;
+	border: 1px solid #ddd;
+	width: 120px;
+	margin: 0 auto;
+	margin-top: 15px;
+}
+.MKright-sift{
+	margin:15px 30px;
+	margin-bottom: 30px;
+}
+.MKright-sift ul li{
+	float: left;
+	display: inline;
+	padding:0 15px;
+	text-align: center;
+	height: 34px;
+	line-height: 34px;
+	cursor: pointer;
+	background: #e5e5e5;
+	color: #666;
+	margin-right: 10px;
+	font-size: 14px;
+}
+.MKright-sift ul li.active{
+	background: #ff4d00;
+	color: #fff;
+}
+/****************预约**************/
+.order-sort{
+	font-size: 16px;
+	float: right;
+	display: inline;
+	margin-top: 10px;
+}
+.order-sort a{
+	color: #888;
+	cursor: pointer;
+	display: inline-block;
+}
+.order-sort span{
+	height: 14px;
+	width: 1px;
+	display: inline-block;
+	background: #ccc;
+	margin: 0 15px;
+}
+.order-sort a.active{
+	color: #ff4d00;
+}
+
+
+/*列表壳子*/
+.appointment{
+	border: 1px solid #c0c0c0;
+	background: #fff;
+	margin: 0px 30px;
+	margin-bottom: 24px;
+}
+.appointment:hover{
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+	box-shadow: 0px 10px 20px rgba(0,0,0,0.15);
+}
+
+/*列表第一行*/
+.appointment .appointmentState{
+	padding: 0px 30px;
+	padding-bottom: 15px;
+	border-bottom: 1px dotted #e5e5e5;
+}
+.appointment .appointmentState h1{
+	line-height: 100%;
+	font-size: 24px;
+	color: #888;
+	margin-top: 25px;
+	margin-bottom: 16px;
+}
+.appointment .appointmentState p.importantTips{
+	font-size: 14px;
+	line-height: 150%;
+	color: #333;
+	float: left;
+	display: inline;
+	margin-bottom: 6px;
+}
+.appointment .appointmentState p.importantTips a{
+	margin:0 5px;
+	color: #ff4d00;
+}
+.appointment .appointmentState p.time{
+	background: url(../images/mk-clock.png) left center no-repeat;
+	padding-left: 20px;
+	color: #999;
+	line-height: 18px;
+	float: right;
+	display: inline-block;
+	font-size: 14px;
+}
+
+/*列表第二行*/
+.appointment .basicMsg{
+	margin:20px 30px;
+	margin-bottom: 30px;
+	font-size: 14px;
+	line-height:100%;
+}
+
+.appointment .basicMsg .detail-orderArea{
+	float: left;
+	display: inline;
+}
+
+.appointment .basicMsg .serviceTitle{
+	margin-bottom: 6px;
+	font-size: 15px;
+	text-decoration: underline;
+}
+.appointment .basicMsg .price{
+	color: #999;
+	font-size: 14px;
+	margin-top: 6px;
+	display:block;
+}
+.appointment .basicMsg .orderNum{
+	color: #999;
+	font-size: 12px;
+	margin-top: 15px;
+	display:block;
+}
+
+
+.appointment .basicMsg .price-orderNum span{
+	color:#ccc;
+	margin:0 10px;
+	font-size: 12px;
+}
+.appointment .accept-refuse{
+	float: right;
+	display: inline;
+}
+.appointment .accept-refuse button{
+	height: 24px;
+	padding:0 16px;
+	border: 0px;
+	background: #ff4d00;
+	color: #fff;
+	cursor: pointer;
+	margin-left: 10px;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.appointment .accept-refuse button:hover{
+	background: #f80;
+}
+.appointment .accept-refuse button:active{
+	color: #b33c00;
+	text-shadow: 0px 1px 0px #ff753a;
+	background: #dd4300;
+	border: #c73c00;
+}
+
+.appointment .accept-refuse button.white{
+	height: 24px;
+	padding:0 16px;
+	border: 0px;
+	background: #fff;
+	border: 1px solid #e5e5e5;
+	color: #666;
+	cursor: pointer;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.appointment .accept-refuse button.white:hover{
+	background: #f5f5f5;
+}
+.appointment .accept-refuse button.white:active{
+	background: #e5e5e5;
+	text-shadow: none
+}
+
+.detail-btnArea{
+	float: right;
+	display: inline;
+}
+.detail-btnArea button{
+	cursor: pointer;
+	width: 100px;
+	height: 30px;
+	margin-top: 2px;
+	border: 1px solid #999;
+	color: #666;
+	font-size: 14px;
+	background: #fff;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.detail-btnArea button:hover{
+	background: #999;
+	color: #fff;
+}
+.detail-btnArea button:active{
+	border: 1px solid #666;
+	background: #666;
+	color: #fff;
+}
+
+
+.appointment-expand{
+	border-top: 1px solid #e5e5e5;
+	display: none;
+}
+.appointment.unfold .appointment-expand{
+	display: block;
+}
+.appointment-expand .orderStep{
+	padding:30px;
+	padding-bottom: 10px;
+}
+
+.apponitment-detail{
+	padding: 0 40px;
+	margin:20px 0px;
+}
+.apponitment-detail h2{
+	font-size: 14px;
+	margin-bottom: 15px;
+	color:#666;
+	font-weight: bold;
+}
+.apponitment-detail p{
+	font-size: 1.3em;
+	margin-bottom: 30px;
+	border-bottom: 1px solid #e5e5e5;
+	padding-bottom: 20px;
+}
+
+.refund{
+	margin: 0 40px;
+	padding:0px 20px;
+	margin-bottom: 30px;
+	border: 1px dotted #f4daa3;
+	background: #faf2e1;
+	padding-bottom: 20px;
+}
+.refund p{
+	line-height: 24px;
+	font-size: 13px;
+	color: #555;
+}
+.refund p.fc-666{
+	font-weight: bold;
+	margin-top: 20px;
+	font-size: 13px;
+	color: #555;
+}
+
+
+.appointment-expand .orderStep ul li{
+	float: left;
+	display: inline;
+	width:20%;
+	height: 24px;
+	line-height: 24px;
+	color: #666;
+	background: #e5e5e5;
+	text-align: center;
+}
+.appointment-expand .orderStep ul li.active{
+	color: #fff;
+	background: #81c646;
+}
+.appointment-expand .orderStep ul li.last{
+	margin-right: 0px;
+}
+
+.appointment-expand .orderStep ul.timeStep li{
+	float: left;
+	display: inline;
+	background: none;
+	width: 20%;
+	height: 24px;
+	line-height: 24px;
+	color: #666;
+	text-align: center;
+}
+.appointment-expand .orderStep ul.timeStep li.active{
+	color: #666;
+}
+.appointment-expand .orderStep ul.timeStep li.last{
+	margin-right: 0px;
+}
+
+
+.appointment-expand .operateArea{
+	height: 80px;
+	background: #f5f5f5;
+	padding: 0 30px;
+}
+.appointment-expand .operateArea button{
+	float: right;
+	display: inline;
+	height: 34px;
+	border: 0;
+	cursor: pointer;
+	min-width: 100px;
+	padding:0 15px;
+	font-size: 14px;
+	margin-top: 23px;
+	margin-left: 10px;
+}
+.appointment-expand .operateArea button.sure{
+	background: #ff4d00;
+	color: #fff;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.appointment-expand .operateArea button.sure:hover{
+	background: #f80;
+}
+.appointment-expand .operateArea button.sure:active{
+	color: #b33c00;
+	text-shadow: 0px 1px 0px #ff753a;
+	background: #dd4300;
+	border: #c73c00;
+}
+
+.appointment-expand .operateArea button.cancle{
+	background: #fff;
+	border: 1px solid #999;
+	color: #666;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.appointment-expand .operateArea button.cancle:hover{
+	background: #999;
+	color: #fff;
+}
+.appointment-expand .operateArea button.cancle:active{
+	border: 1px solid #666;
+	background: #666;
+	color: #fff;
+}
+/***********预约结束**********/
+
+/**********账户**********/
+.pay-success{
+	height: 42px;
+	line-height: 42px;
+	border: 1px solid #a9d98d;
+	color: #338c00;
+	font-size: 14px;
+	font-weight: bold;
+	background: url(../images/successed.png) left center no-repeat #d6f5c4;
+	padding-left: 55px;
+	margin-bottom: 15px;
+}
+.pay-fail{
+	height: 42px;
+	line-height: 42px;
+	border: 1px solid #ffa179;
+	color: #ff4d00;
+	font-size: 14px;
+	font-weight: bold;
+	background: url(../images/failed.png) left center no-repeat #ffe4d9;
+	padding-left: 55px;
+	margin-bottom: 15px;
+}
+.pay-success .closeTips,.pay-fail .closeTips{
+	cursor: pointer;
+	height: 42px;
+	width: 42px;
+	background: url(../images/close-tips.png) center center no-repeat;
+	float: right;
+	display: inline;
+}
+.myaccountBox{
+	margin: 30px 40px;
+}
+.mk-totalColumn{
+	background: #f5f5f5;
+	line-height: 60px;
+	margin-bottom: 15px;
+}
+.mk-totalColumn-content{
+	border: 2px solid #f5f5f5;
+	padding: 15px 25px;
+	border-top: 0;
+	margin-top: -15px;
+}
+.trade-record{
+	border: 1px solid #e5e5e5;
+	background: #fff;
+}
+.trade-record .title{
+	border: 0px;
+	border-bottom: 1px solid #e5e5e5;
+	background: #f8f8f8;
+	height: 60px;
+	line-height: 60px;
+	padding:0 20px;
+	font-size: 16px;
+	color: #333;
+}
+.trade-record .title .right{
+	font-size: 12px;
+	color: #999;
+}
+.trade-record .tradeList{
+	margin:0 15px;
+	border-bottom: 1px dotted #d5d5d5;
+	padding: 0 10px;
+	font-size: 14px;
+}
+.trade-record .tradeList .name{
+	float: left;
+	display: inline;
+	width: 57%;
+	font-size: 12px;
+	color: #444;
+	line-height: 64px;
+}
+.trade-record .tradeList .name a{
+	float: left;
+	display: inline-block;
+	width: 60%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	margin-right: 10px;
+}
+.trade-record .tradeList .num{
+	float: left;
+	display: inline;
+	width: 16%;
+	color: #888;
+	font-size: 12px;
+	line-height: 64px;
+}
+.trade-record .tradeList .kind{
+	float: left;
+	display: inline;
+	width: 11%;
+	text-align: center;
+	color: #999;
+	font-size: 12px;
+	line-height: 64px;
+}
+.trade-record .tradeList .kind.expand{
+	background: url(../images/form-pulldown-arrow.png) right center no-repeat;
+	cursor: pointer;
+	position: relative;
+}
+.trade-record .tradeList .kind.expand .tips-orange{
+	padding:8px;
+	line-height: 100%;
+	left:-100px;
+	top:46px;
+	font-size: 12px;
+	position: absolute;
+	z-index: 1000;
+	max-width:340px;
+	min-width: 280px;
+	text-align: left;
+	line-height: 140%;
+	display: none;
+}
+.trade-record .tradeList .kind.expand:hover .tips-orange{
+	display:block;
+}
+.trade-record .tradeList .price{
+	float: left;
+	display: inline;
+	font-weight: bold;
+	text-align: right;
+	width: 15%;
+	line-height: 64px;
+}
+.tradeList-loadMore{
+	background: #f5f5f5;
+	color: #999;
+	font-size: 14px;
+	line-height: 46px;
+	margin:20px;
+	text-align: center;
+	cursor: pointer;
+}
+.tradeList-loadMore img{
+	width: 18px;
+	margin-right: 15px;
+}
+.chargeForm p.title{
+	height: 34px;
+	background: #f8f8f8;
+	font-size: 12px;
+	font-weight: bold;
+	color: #666;
+	line-height:34px;
+	padding: 0 10px;
+	border: 1px dotted #e5e5e5;
+}
+.chargeForm .payMethod-banklist{
+	padding:0px;
+	margin:20px 0px;
+}
+.chargeForm .partline{
+	border-bottom: 1px dotted #e5e5e5;margin-top: 10px;
+}
+.chargeForm .moreBank{
+	width: 140px;
+	height: 36px;
+	border: 1px solid #e5e5e5;
+	font-size: 14px;
+	color: #2e9fe5;
+	text-align: center;
+	line-height: 36px;
+	cursor: pointer;
+	margin: 10px 0px;
+}
+.chargeForm .MK-form{
+	width: 360px;
+	margin-left: 0px;
+	margin-top: 30px;
+}
+.chargeForm .MK-form .MK-formline{
+	margin-bottom: 15px;
+}
+input[type=text].cash{
+	font-weight: bold;
+	color: #f60;
+}
+
+
+/**********创建新直播**********/
+.creat-living{
+	margin: 0 30px;
+}
+.creat-livingBox{
+	border: 1px solid #ddd;
+	padding: 40px 0px 20px 0px;
+}
+.living-help{
+	margin: 0 30px;
+}
+.living-help h2{
+	color: #666;
+	font-size: 24px;
+	line-height: 200%;
+	border-bottom: 1px solid #ddd;
+}
+.living-help h3{
+	margin-top: 15px;
+	font-size: 14px;
+	color: #333;
+	line-height: 200%;
+	font-weight: bold;
+}
+.living-help p{
+	text-indent: 2em;
+	font-size: 14px;
+	line-height: 150%;
+	margin-top: 10px;
+}
+.living-help img{
+	margin-top: 10px;
+	max-width: 100%
+}
+/**********成为专家**********/
+
+/*成为专家步骤*/
+.tobeExpert-step{
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 15px;
+}
+.stepOn,.stepOff{
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+.stepOn .label{
+	float: left;
+	display: inline;
+	width: 204px;
+	height: 42px;
+	line-height: 42px;
+	text-align: center;	
+	font-size: 1.6em;
+	margin-left: 2px;
+	background: #ff4d00;
+	color: #fff;
+}
+.stepOn span{
+	float: left;
+	display: inline-block;
+	width: 42px;
+	line-height: 42px;
+	height: 42px;
+	text-align: center;	
+	background: #ff4d00;
+	color: #fff;
+	font-size: 1.4em;
+}
+
+.stepOff .label{
+	float: left;
+	display: inline;
+	width: 204px;
+	height: 42px;
+	line-height: 42px;
+	text-align: center;	
+	background: #e5e5e5;
+	font-size: 1.6em;
+	margin-left: 2px;
+}
+.stepOff span{
+	float: left;
+	display: inline-block;
+	width: 42px;
+	line-height: 42px;
+	height: 42px;
+	text-align: center;	
+	background: #ff4d00;
+	color: #fff;
+	font-size: 1.4em;
+}
+
+.stepOn p{
+	display: block;
+	width: 1px;
+	border-left: 1px dotted #ccc;
+	height: 120px;
+	margin:10px 0px 10px 21px;
+}
+.stepOff p{
+	display:none;
+}
+
+
+/*成为专家表单*/
+.MK-form{
+	width: 600px;
+	margin: 0 auto;
+}
+.MK-formRemind{
+	color: #999;
+	margin-bottom:25px;
+	line-height: 23px;
+	background: #f5f5f5;
+	padding:8px 50px;
+}
+.MK-formRemind span{
+	color: #333;
+	font-size: 2em;
+}
+.becomeExpert-checking{
+	font-size: 24px;
+	color: #666;
+	text-align: center;
+	padding: 30px 0px;
+}
+.becomeExpert-checking p{
+	font-size: 16px;
+	color: #666;
+	text-align: center;
+	padding: 10px 0px;
+}
+
+.becomeExpert-step{
+	padding: 30px 60px;
+}
+.becomeExpert-step ul li{
+	float: left;
+	display: inline;
+	width: 33.33%;
+	background: #e5e5e5;
+	height: 24px;
+	line-height: 24px;
+	font-weight: bold;
+	color: #666;
+	text-align: center;
+}
+.becomeExpert-step ul li.active{
+	background: #81c646;
+	color: #fff;
+}
+.MK-formline{
+	margin-bottom: 25px;
+}
+.MK-formline label{
+	font-size: 1.4em;
+	margin-bottom: 8px;
+	display: block;
+	line-height: 1.4em;
+	position: relative;
+}
+.MK-formline label em{
+	margin-right:5px;
+	color: #ff4d00;
+}
+.MK-formline .formContent button.MsureLabel{display: none;}
+.MK-formline .formContent .unit{
+	position: absolute;
+	z-index: 1000;
+	height: 36px;
+	line-height: 36px;
+	color: #ff4d00;
+	right:10px;
+	top:0px;
+}
+.MK-formline label .notice{
+	position: absolute;
+	right: 0px;
+	top:0px;
+}
+.MK-formline label .notice .expand{
+	right:-2px;
+	top:18px;
+	z-index: 10000;
+	left: auto;
+	width: 360px;
+	max-width: 360px;
+	text-align: left;
+}
+
+/*正常状态*/
+.MK-formline .formContent{
+	position: relative;
+}
+.MK-formline .formContent em.placeholder{
+	position: absolute;
+	top:0px;
+	left: 0px;
+	z-index: 900;
+	height: 24px;
+	padding: 7px 0px;
+	padding-left: 3%;
+	font-size: 12px;
+	color: #666;
+	line-height:24px;
+	color: #bbb;
+	cursor: text;
+	background: none;
+}
+
+.MK-formline .formContent input{
+	border: 1px solid #ddd;
+	width: 94%;
+	padding:0 3%;
+	height: 36px;
+	box-sizing: content-box;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.MK-formline .formContent .errorTip{
+	display: none;
+}
+.MK-formline .formContent .input-connectMethod{
+	float: left;
+	display: inline;
+	width:380px;
+	height: 42px;
+	border: 1px solid #e5e5e5;
+	line-height: 42px;
+	font-size: 1.4em;
+	text-indent: 15px;
+	margin-left: 10px;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.MK-formline .formContent textarea{
+	border: 1px solid #ddd;
+	display: block;
+	width: 94%;
+	min-height: 36px;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+	resize: none;
+	box-sizing: content-box;
+	line-height: 24px;
+	font-size: 1.4em;
+	padding:7px 3%;
+}
+
+
+/*聚焦状态*/
+.MK-formline .formContent.focus input{
+	border: 1px solid #619fde;
+	box-shadow: 0px 0px 5px #97c0e9;
+}
+.MK-formline .formContent.focus textarea{
+	border: 1px solid #619fde;
+	box-shadow: 0px 0px 5px #97c0e9;
+}
+.MK-formline .formContent.focus .errorTip{
+	display: none;
+}
+.MK-formline .formContent.focus .input-connectMethod{
+	border: 1px solid #619fde;
+	box-shadow: 0px 0px 5px #97c0e9;
+}
+
+
+/*错误状态*/
+.MK-formline .formContent.error input{
+	border: 1px solid #ff2727;
+	box-shadow: 0px 0px 5px #f9acac;
+}
+.MK-formline .formContent.error input[type=radio]{
+	border: none;
+	box-shadow:none;
+}
+.MK-formline .formContent.error textarea{
+	border: 1px solid #ff2727;
+	box-shadow: 0px 0px 5px #f9acac;
+}
+.MK-formline .formContent.error .input-connectMethod{
+	border: 1px solid #ff2727;
+	box-shadow: 0px 0px 5px #f9acac;
+}
+
+.MK-formline .formContent.error .errorTip{
+	display: block;
+	position: absolute;
+	height: 36px;
+	border: 1px solid #e5e5e5;
+	background: #fff;
+	padding: 0 10px;
+	right:-145px;
+	top: -1px;
+	line-height: 36px;
+	color: red;
+	width: 110px;
+	box-shadow: 0px 0px 5px #e5e5e5;
+	white-space: nowrap; 
+	font-size: 12px;
+}
+.MK-formline .formContent.error .errorTip .triangle{
+	position: absolute;
+	left:-7px;
+	background: url(../images/errorExpand-arrow.png) center center no-repeat;
+	height: 36px;
+	width: 7px;
+}
+
+
+/*富文本输入指引*/
+.MK-formline .formContent .textareaInput-userGuid{
+	box-shadow: 0px 10px 20px rgba(0,0,0,0.15);
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height:0px;
+	overflow: hidden;
+	z-index: 19999;
+	border: 0px solid #ddd;
+	background: #fff;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.MK-formline .formContent .textareaInput-userGuid.active{
+	height: 292px;
+}
+.MK-formline .formContent .textareaInput-userGuid .close{
+	width: 30px;
+	height: 30px;
+	right: 0px;
+	top:0px;
+	display: none;
+	position: absolute;
+	background: url(../images/close-tips.png) center center no-repeat #eee;
+	cursor: pointer;
+}
+.MK-formline .formContent .textareaInput-userGuid:hover .close{
+	display: block;
+}
+.MK-formline .formContent .textareaInput-userGuid .close:hover{
+	background: url(../images/close-tips.png) center center no-repeat #ddd;
+}
+.MK-formline .formContent .wordArea{
+	height: 218px;
+	border: 1px solid #ddd;
+	overflow:scroll;
+	overflow-x: hidden;
+	padding:20px;
+	padding-right: 10px;
+}
+.MK-formline .formContent .wordArea h2{
+	color: #333;
+	font-weight: bold;
+	margin-bottom: 10px;
+	margin-top: 6px;
+	font-size: 15px;
+}
+.MK-formline .formContent .wordArea p{
+	font-size: 14px;
+	color: #666;
+	line-height: 180%;
+}
+.MK-formline .formContent .operateArea{
+	height: 34px;
+	background: #eee;
+}
+.MK-formline .formContent .operateArea ul{
+	float: left;
+	display: inline;
+	margin-top: 12px;
+}
+.MK-formline .formContent .operateArea ul li{
+	float: left;
+	display: inline;
+	width: 10px;
+	height: 10px;
+	cursor: pointer;
+	background: #bbb;
+	margin-left: 12px;
+}
+.MK-formline .formContent .operateArea ul li.active{
+	background: #ff4d00;
+}
+.MK-formline .formContent .operateArea a.right{
+	float: right;
+	display: inline-block;
+	height: 34px;
+	line-height: 34px;
+	color: #666;
+	padding: 0 25px;
+}
+.MK-formline .formContent .operateArea a.right.orange{
+	background: #ff4d00;
+	color: #fff;
+}
+
+/*下拉选择*/
+.MK-formline .formContent input[type=text].pulldown{
+	background: url(../images/form-pulldown-arrow.png) 98% center no-repeat #fff;
+}
+.MK-formline .formContent input[type=text].pulldown.pullup{
+	background: url(../images/form-pullup-arrow.png) 98% center no-repeat #fff;
+}
+.MK-formline .formContent .form-pulldown{
+	border: 1px solid #ddd;
+	background: #fff;
+	position: absolute;
+	top:36px;
+	width: 100%;
+	z-index: 5000;
+	left: 0px;
+	box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+}
+.MK-formline .formContent .form-pulldown p{
+	height: 34px;
+	line-height: 34px;
+	padding: 0 15px;
+	color: #666;
+	cursor: pointer;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.MK-formline .formContent .form-pulldown p:hover{
+	background: #f5f5f5;
+}
+.MK-formline .formContent .form-pulldown p.active{
+	background: #f5f5f5;
+}
+
+
+
+/*按钮*/
+.MK-formline button.orange{
+	width: 120px;
+	border: 0px;
+	height: 36px;
+	background: #ff4d00;
+	color: #fff;
+	text-align: center;
+	cursor: pointer;
+	font-size: 1.6em;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.MK-formline button:hover{
+	background: #f80;
+}
+.MK-formline button:active{
+	color: #b33c00;
+	text-shadow: 0px 1px 0px #ff753a;
+	background: #dd4300;
+	border: #c73c00;
+}
+
+
+.MK-formline button.white{
+	width: 120px;
+	border: 0px;
+	height: 36px;
+	background: #fff;
+	color: #666;
+	border: 1px solid #ddd;
+	text-align: center;
+	cursor: pointer;
+	font-size: 1.6em;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.MK-formline button.white:hover{
+	color: #ff4d00
+}
+.MK-formline button.white:active{
+	background: #efefef;
+	color: #ff4d00;
+	text-shadow: none;
+}
+
+
+.MK-formline .addedLabel{
+	margin-top: .5em;
+}
+.MK-formline .addedLabel a{
+	float: left;
+	display: inline-block;
+	height: 24px;
+	line-height: 24px;
+	background: #d3e4f2;
+	padding: 0 7px;
+	padding-right: 0px;
+	margin-right:.6em;
+	color: #444;
+	cursor: pointer;
+	font-size: 12px;
+	margin-bottom:5px;
+}
+.MK-formline .addedLabel a span{
+	float: right;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	cursor: pointer;
+	background: url(../images/close-label.png) center center no-repeat;
+}
+
+.MK-formline .addedLabel a.current{
+	background: #ff4d00;
+	color: #fff;
+}
+.MK-formline .addedLabel a.current span{
+	background: url(../images/close-labelWhite.png) center center no-repeat;
+}
+
+.MK-formline .addedLabel.relationLabel{
+	border: 1px dotted #ddd;
+	background: #fff;
+	padding: 10px;
+	padding-bottom: 5px;
+}
+.MK-formline .addedLabel.relationLabel p{
+	font-size:13px;
+	color: #999;
+	margin-bottom: 5px;
+}
+/*添加一项*/
+.addedItem{
+	position: relative;
+	margin-bottom: 10px;
+	margin: 30px 60px; 
+	background: #f8f8f8;
+	border: 1px solid #e5e5e5;
+}
+.addedItem .deleteItem{
+	display: none;
+}
+.addedItem:hover .deleteItem{
+	display: block;
+	position: absolute;
+	right:0px;
+	top:0px;
+	background: url(../images/closeItem.png) center center no-repeat;
+	width: 42px;
+	height: 42px;
+	z-index: 1000;
+	cursor: pointer;
+}
+.addItem-box{
+	margin: 30px 60px;
+}
+.addItem-box table tr td{
+	height: 40px;
+	font-size: 14px;
+	color: #333;
+	border: 1px solid #e5e5e5;
+	padding: 10px;
+}
+.addItem-box table tr td.column{
+	background: #f5f5f5;
+	text-align: right;
+	color: #666;
+	white-space: nowrap;
+}
+.addItem-box table tr td img{
+	max-width: 100%;
+	display: block;
+	margin: 10px 0px;
+}
+.addItem-box table tr td .overflow-hidden{
+	max-height: 84px;
+	line-height: 150%;
+	overflow: hidden;
+}
+
+
+.addItem-form{
+	padding: 40px 0px;
+	margin: 30px 60px;
+	background: #f5f5f5;
+	border: 1px solid #e5e5e5;
+}
+.addItem{
+	height: 42px;
+	border: 1px solid #ff4d00;
+	color: #ff4d00;
+	font-size: 1.6em;
+	background: #fff;
+	width: 100%;
+	cursor: pointer;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.addItem:hover{
+	color: #fff;
+	background: #ff4d00;
+}
+.addItem:active{
+	color: #842800;
+	text-shadow: 0px 1px 0px #ff753a;
+	background: #dd4300;
+	border: #c73c00;
+}
+
+.connectMethod-item{
+	height: 42px;
+	line-height: 42px;
+	font-size: 1.4em;
+	padding: 0 15px;
+}
+
+.select-connectMethod{
+	float: left;
+	display: inline;
+	width:86px;
+	height: 42px;
+	border: 1px solid #e5e5e5;
+	line-height: 42px;
+	background: url(../images/form-pulldown-arrow.png) 85% center no-repeat;
+	font-size: 1.4em;
+	position: relative;
+	text-indent: 15px;
+}
+.select-connectMethod.pullup{
+	background: url(../images/form-pullup-arrow.png) 85% center no-repeat;
+}
+.select-connectMethod:hover{
+	box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+}
+.select-connectMethod .expand{
+	border: 1px solid #e5e5e5;
+	background: #fff;
+	position: absolute;
+	width: 100%;
+	left: -1px;
+	z-index: 9999;
+	box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+}
+.select-connectMethod .expand p{
+	height: 34px;
+	line-height: 34px;
+	padding: 0 15px;
+	color: #666;
+	cursor: pointer;
+}
+.select-connectMethod .expand p:hover{
+	background: #f5f5f5;
+}
+
+.add-connectMethod{
+	float: left;
+	display: inline;
+	width:110px;
+	color: #fff;
+	height: 42px;
+	font-size: 1.4em;
+	margin-left: 10px;
+	background: #ff4d00;
+	border: 1px solid #ff4d00;
+	cursor: pointer;
+}
+
+
+/*发服务须知*/
+.addService-notice{
+	padding:15px;
+}
+.serviceList.addedItem .serviceLeft h2,
+.serviceList.addedItem .serviceLeft .labels,
+.serviceList.addedItem .serviceLeft .describe,
+.serviceList.addedItem .serviceLeft .fold,
+.serviceList.addedItem .serviceLeft .learnMore{
+	margin-left: 30px;
+}
+
+/*提交审核*/
+.submit-check{
+	background: #efefef;
+	padding:30px 0px;
+}
+.submit-check p{
+	line-height: 42px;
+	text-align: center;
+	font-size: 1.4em;
+}
+.submit-check button{
+	height: 42px;
+	width:600px;
+	margin: 0 auto;
+	border: 0;
+	display: block;
+	cursor: pointer;
+	color: #fff;
+	background: #ff4d00;
+	font-size: 1.4em;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.submit-check button:hover{
+	background: #f80;
+}
+.submit-check button:active{
+	color: #842800;
+	text-shadow: 0px 1px 0px #ff753a;
+	background: #dd4300;
+	border: #c73c00;
+}
+.submit-check button.backLast{
+	margin-top: 15px;
+	color: #666;
+	background: #fff;
+	border: 1px solid #ddd;
+	font-size: 1.4em;
+	transition: all 0.3s;
+	-moz-transition:  all 0.3s;	/* Firefox 4 */
+	-webkit-transition: all 0.3s;	/* Safari 和 Chrome */
+	-o-transition: all 0.3s;	/* Opera */
+}
+.submit-check button.backLast:hover{
+	background: #f8f8f8;
+	color: #ff4d00;
+}
+.submit-check button.backLast:active{
+	background: #e5e5e5;
+	color: #ff4d00;
+	text-shadow: 0px 1px 0px #fff;
+}
+
+/**********成为专家结束**********/
+
+
+/**********系统消息**********/
+.systemMsg-sort{
+	background: #f5f5f5;
+	height: 55px;
+	line-height: 55px;
+	padding: 0 15px;
+}
+.systemMsg-sort .left{
+	margin-left: 15px;
+}
+.systemMsg-sort .left input{
+	width: 14px;
+	height: 14px;
+}
+.systemMsg-sort .left button{
+	cursor: pointer;
+	height: 28px;
+	padding: 0 10px;
+	border: 1px solid #e5e5e5;
+	background: #fff;
+	font-size: 12px;
+	margin-left:8px;
+}
+.systemMsg-sort .right{
+	color: #ccc;
+	font-size: 14px;
+}
+.systemMsg-list{
+	border-bottom: 1px dotted #e5e5e5;
+	margin: 0 15px;
+	padding: 0 15px;
+	font-size: 14px;
+}
+.systemMsg-list a{
+	line-height: 24px;
+	padding:22px 0px;
+	float: left;
+	display: inline-block;
+	width: 70%;
+	color: #333;
+}
+.systemMsg-list a.readed{
+	color: #777;
+	font-weight: normal
+}
+.systemMsg-list input{
+	width: 14px;
+	height: 14px;
+	margin-top: 27px;
+	margin-right: 10px;
+	float: left;
+	display: inline;
+}
+.systemMsg-list .right{
+	float: right;
+	display: inline;
+	font-size: 12px;
+	color: #999;
+	line-height: 68px;
+}
+p.systemMsg-detail{
+	background: #f5f5f5;
+	font-size: 14px;
+	color: #666;
+	line-height: 200%;
+	padding:20px 25px;
+	margin-bottom: 15px;
+}
+/**********系统消息**********/
+
+.systemMsg-list span.delete{
+	display:none;
+	cursor: pointer;
+	width: 24px;
+	height: 24px;
+	border: 1px solid #ddd;
+	border-radius: 2px;
+	background:url(../images/delete.png) center center no-repeat #f5f5f5;
+	background-size: 16px;
+	float: left;
+	margin-top: 21px;
+	box-shadow: 1px 1px 0px #fff inset;
+}
+.systemMsg-list:hover span.delete{
+	display: inline-block;
+}
+.systemMsg-list:hover span.delete:hover{
+	background-color:#fff;
+}
+.systemMsg-list:hover span.delete:active{
+	background-color:#efefef;
+}
+.systemMsg-list span.edit{
+	display:none;
+	margin-top: 21px;
+	margin-right:8px;
+	cursor: pointer;
+	width: 24px;
+	height: 24px;
+	border: 1px solid #ddd;
+	border-radius: 2px;
+	background: #fff;
+	background:url(../images/edit.png) center center no-repeat #f5f5f5;
+	background-size: 16px;
+	float: left;
+	box-shadow: 1px 1px 0px #fff inset;
+}
+.systemMsg-list:hover span.edit{
+	display: inline-block;
+}
+.systemMsg-list:hover span.edit:hover{
+	background-color:#fff;
+}
+.systemMsg-list:hover span.edit:active{
+	background-color:#efefef;
+}

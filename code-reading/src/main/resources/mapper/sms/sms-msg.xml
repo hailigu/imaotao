@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!--scr.t_appointment 映射文件 vision:1.0.1 -->
+<mapper namespace="com.codeReading.busi.dal.iface.sms.ISmsMsgDao">	
+	<sql id="column"> smsid,msgid,phone,content,send_state,callback_state,modtime,intime </sql>
+	
+	<sql id="key_where"> where smsid=#{smsid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="SmsMsg" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_sms_msg <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="SmsMsg" parameterType="SmsMsg">
+		select <include refid="column"/> from scr.t_sms_msg 
+		<where>
+			<if test="smsid != null &amp;&amp; smsid != ''"> and smsid=#{smsid}</if>
+			<if test="msgid != null &amp;&amp; msgid != ''"> and msgid=#{msgid}</if>
+			<if test="phone != null &amp;&amp; phone != ''"> and phone=#{phone}</if>
+			<if test="content != null &amp;&amp; msgid != ''"> and content=#{content}</if>
+			<if test="send_state != null &amp;&amp; send_state != ''"> and send_state=#{send_state}</if>
+			<if test="callback_state != null &amp;&amp; callback_state != ''"> and callback_state=#{callback_state}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="SmsMsg">
+		insert into scr.t_sms_msg (
+		<trim suffixOverrides=",">
+			<if test="smsid != null &amp;&amp; smsid != ''">smsid,</if>
+			<if test="msgid != null &amp;&amp; msgid != ''">msgid,</if>
+			<if test="phone != null &amp;&amp; phone != ''">phone,</if>
+			<if test="content != null &amp;&amp; content != ''">content,</if>
+			<if test="send_state != null &amp;&amp; send_state  != ''">send_state ,</if>
+			<if test="callback_state != null &amp;&amp; callback_state != ''">call_state,</if>	
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="smsid != null &amp;&amp; smsid != ''">#{smsid},</if>
+			<if test="msgid != null &amp;&amp; msgid != ''">#{msgid},</if>
+			<if test="phone != null &amp;&amp; phone != ''">#{phone},</if>
+			<if test="content != null">#{content},</if>
+			<if test="send_state != null &amp;&amp; send_state != ''">#{send_state},</if>
+			<if test="callback_state != null &amp;&amp; callback_state != ''">#{callback_state},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="SmsMsg">
+		update scr.t_sms_msg 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="msgid != null &amp;&amp; msgid != ''">msgid=#{msgid},</if>
+			<if test="phone != null &amp;&amp; phone != ''">phone=#{phone},</if>
+			<if test="content != null">content=#{content},</if>
+			<if test="send_state != null &amp;&amp; send_state != ''">send_state=#{send_state},</if>
+			<if test="callback_state != null &amp;&amp; callback_state != ''">callback_state=#{callback_state},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!--scr.t_source_watch 映射文件 vision:1.0.1 -->
+<mapper namespace="com.codeReading.busi.dal.iface.source.ISourceWatchDao">
+	
+	<sql id="column"> watchid,userid,projectid,state,modtime,intime </sql>
+	
+	<sql id="key_where"> where watchid=#{watchid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="SourceWatch" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_source_watch <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="SourceWatch" parameterType="SourceWatch">
+		select <include refid="column"/> from scr.t_source_watch 
+		<where>
+			<if test="watchid != null &amp;&amp; watchid != ''"> and watchid=#{watchid}</if>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="projectid != null &amp;&amp; projectid != ''"> and projectid=#{projectid}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="SourceWatch" parameterType="SourceWatch">
+		select <include refid="column"/> from scr.t_source_watch
+	</select>
+	
+	<select id="findByPage" resultType="SourceWatch" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_source_watch
+		<where>
+			<if test="param.watchid != null &amp;&amp; param.watchid != ''"> and watchid=#{param.watchid}</if>
+			<if test="param.userid != null &amp;&amp; param.userid != ''"> and userid=#{param.userid}</if>
+			<if test="param.projectid != null &amp;&amp; param.projectid != ''"> and projectid=#{param.projectid}</if>
+			<if test="param.state != null &amp;&amp; param.state != ''"> and state=#{param.state}</if>
+			<if test="param.modtime != null"> and modtime=#{param.modtime}</if>
+			<if test="param.intime != null"> and intime=#{param.intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''"> ${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="SourceWatch" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_source_watch
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''"> ${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_source_watch
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="SourceWatch">
+		insert into scr.t_source_watch (
+		<trim suffixOverrides=",">
+			<if test="watchid != null &amp;&amp; watchid != ''">watchid,</if>
+			<if test="userid != null &amp;&amp; userid != ''">userid,</if>
+			<if test="projectid != null &amp;&amp; projectid != ''">projectid,</if>
+			<if test="state != null &amp;&amp; state != ''">state,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="watchid != null &amp;&amp; watchid != ''">#{watchid},</if>
+			<if test="userid != null &amp;&amp; userid != ''">#{userid},</if>
+			<if test="projectid != null &amp;&amp; projectid != ''">#{projectid},</if>
+			<if test="state != null &amp;&amp; state != ''">#{state},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="SourceWatch">
+		update scr.t_source_watch 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="watchid != null &amp;&amp; watchid != ''">watchid=#{watchid},</if>
+			<if test="userid != null &amp;&amp; userid != ''">userid=#{userid},</if>
+			<if test="projectid != null &amp;&amp; projectid != ''">projectid=#{projectid},</if>
+			<if test="state != null &amp;&amp; state != ''">state=#{state},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="SourceWatch">
+		delete from scr.t_source_watch <include refid="key_where"/>
+	</delete>
+	
+	<!-- 自定义操作 -->
+	<select id="findWatchByPage" resultType="map" parameterType="QueryBean">
+		select sw.projectid as projectid, sw.intime as watchtime, sp.name as name, sp.description as description, sp.intime as intime, ss.annotationcount as annotationcount, ss.watchcount as watchcount	
+		from scr.t_source_watch sw left join scr.t_source_project sp on sw.projectid = sp.projectid
+			 left join scr.t_source_project_statistics ss on sw.projectid = ss.projectid
+		<where>
+			<if test="param.watchid != null &amp;&amp; param.watchid != ''"> and sw.watchid=#{param.watchid}</if>
+			<if test="param.userid != null &amp;&amp; param.userid != ''"> and sw.userid=#{param.userid}</if>
+			<if test="param.projectid != null &amp;&amp; param.projectid != ''"> and sw.projectid=#{param.projectid}</if>
+			<if test="param.state != null &amp;&amp; param.state != ''"> and sw.state=#{param.state}</if>
+			<if test="param.modtime != null"> and sw.modtime=#{param.modtime}</if>
+			<if test="param.intime != null"> and sw.intime=#{param.intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by sw.${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''"> ${page.ascend}</if>
+	</select>
+	
+	
+	
+</mapper>

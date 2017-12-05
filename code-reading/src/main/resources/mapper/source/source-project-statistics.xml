@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!--scr.t_source_project_statistics 映射文件 vision:1.0.1 -->
+<mapper namespace="com.codeReading.busi.dal.iface.source.ISourceProjectStatisticsDao">
+	
+	<sql id="column"> projectid,annotationcount,watchcount,modtime,intime </sql>
+	
+	<sql id="key_where"> where projectid=#{projectid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="SourceProjectStatistics" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_source_project_statistics <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="SourceProjectStatistics" parameterType="SourceProjectStatistics">
+		select <include refid="column"/> from scr.t_source_project_statistics 
+		<where>
+			<if test="projectid != null &amp;&amp; projectid != ''"> and projectid=#{projectid}</if>
+			<if test="annotationcount != null"> and annotationcount=#{annotationcount}</if>
+			<if test="watchcount != null"> and watchcount=#{watchcount}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="SourceProjectStatistics" parameterType="SourceProjectStatistics">
+		select <include refid="column"/> from scr.t_source_project_statistics
+	</select>
+	
+	<select id="findByPage" resultType="SourceProjectStatistics" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_source_project_statistics
+		<where>
+			<if test="param.projectid != null &amp;&amp; param.projectid != ''"> and projectid=#{param.projectid}</if>
+			<if test="param.annotationcount != null"> and annotationcount=#{param.annotationcount}</if>
+			<if test="param.watchcount != null"> and watchcount=#{param.watchcount}</if>
+			<if test="param.modtime != null"> and modtime=#{param.modtime}</if>
+			<if test="param.intime != null"> and intime=#{param.intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''"> ${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="SourceProjectStatistics" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_source_project_statistics
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''"> ${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_source_project_statistics
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="SourceProjectStatistics">
+		insert into scr.t_source_project_statistics (
+		<trim suffixOverrides=",">
+			<if test="projectid != null &amp;&amp; projectid != ''">projectid,</if>
+			<if test="annotationcount != null">annotationcount,</if>
+			<if test="watchcount != null">watchcount,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="projectid != null &amp;&amp; projectid != ''">#{projectid},</if>
+			<if test="annotationcount != null">#{annotationcount},</if>
+			<if test="watchcount != null">#{watchcount},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="SourceProjectStatistics">
+		update scr.t_source_project_statistics 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="projectid != null &amp;&amp; projectid != ''">projectid=#{projectid},</if>
+			<if test="annotationcount != null">annotationcount=#{annotationcount},</if>
+			<if test="watchcount != null">watchcount=#{watchcount},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="SourceProjectStatistics">
+		delete from scr.t_source_project_statistics <include refid="key_where"/>
+	</delete>
+	
+	<!-- 自定义操作 -->
+	<update id="addAnnotationCount" parameterType="map">
+		update scr.t_source_project_statistics
+		set annotationcount=annotationcount+${annotationcount} 
+		where projectid=#{projectid}
+	</update>
+	
+	<update id="addWatchCount" parameterType="map">
+		update scr.t_source_project_statistics
+		set watchcount=watchcount+${watchcount} 
+		where projectid=#{projectid}
+	</update>
+</mapper>

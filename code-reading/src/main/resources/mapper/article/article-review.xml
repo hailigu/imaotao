@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codeReading.busi.dal.iface.article.IArticleReviewDao">
+	
+	<sql id="column"> reviewid,articleid,objectid,content,attachments,author,busistate,state,modtime,intime </sql>
+	
+	<sql id="key_where"> where reviewid=#{reviewid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="ArticleReview" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_article_review <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="ArticleReview" parameterType="ArticleReview">
+		select <include refid="column"/> from scr.t_article_review 
+		<where>
+			<if test="reviewid != null &amp;&amp; reviewid != ''"> and reviewid=#{reviewid}</if>
+			<if test="articleid != null &amp;&amp; articleid != ''"> and articleid=#{articleid}</if>
+			<if test="objectid != null &amp;&amp; objectid != ''"> and objectid=#{objectid}</if>
+			<if test="content != null &amp;&amp; content != ''"> and content=#{content}</if>
+			<if test="attachments != null &amp;&amp; attachments != ''"> and attachments=#{attachments}</if>
+			<if test="author != null &amp;&amp; author != ''"> and author=#{author}</if>
+			<if test="busistate != null &amp;&amp; busistate != ''"> and busistate=#{busistate}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="ArticleReview" parameterType="ArticleReview">
+		select <include refid="column"/> from scr.t_article_review
+	</select>
+	
+	<select id="findByPage" resultType="ArticleReview" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_article_review
+		<where>
+			<if test="reviewid != null &amp;&amp; reviewid != ''"> and reviewid=#{reviewid}</if>
+			<if test="articleid != null &amp;&amp; articleid != ''"> and articleid=#{articleid}</if>
+			<if test="objectid != null &amp;&amp; objectid != ''"> and objectid=#{objectid}</if>
+			<if test="content != null &amp;&amp; content != ''"> and content=#{content}</if>
+			<if test="attachments != null &amp;&amp; attachments != ''"> and attachments=#{attachments}</if>
+			<if test="author != null &amp;&amp; author != ''"> and author=#{author}</if>
+			<if test="busistate != null &amp;&amp; busistate != ''"> and busistate=#{busistate}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="ArticleReview" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_article_review
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_article_review
+		<where>
+			<if test="reviewid != null &amp;&amp; reviewid != ''"> and reviewid=#{reviewid}</if>
+			<if test="articleid != null &amp;&amp; articleid != ''"> and articleid=#{articleid}</if>
+			<if test="objectid != null &amp;&amp; objectid != ''"> and objectid=#{objectid}</if>
+			<if test="content != null &amp;&amp; content != ''"> and content=#{content}</if>
+			<if test="attachments != null &amp;&amp; attachments != ''"> and attachments=#{attachments}</if>
+			<if test="author != null &amp;&amp; author != ''"> and author=#{author}</if>
+			<if test="busistate != null &amp;&amp; busistate != ''"> and busistate=#{busistate}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="ArticleReview">
+		insert into scr.t_article_review (
+		<trim suffixOverrides=",">
+			<if test="reviewid != null &amp;&amp; reviewid != ''">reviewid,</if>
+			<if test="articleid != null &amp;&amp; articleid != ''">articleid,</if>
+			<if test="objectid != null &amp;&amp; objectid != ''">objectid,</if>
+			<if test="content != null &amp;&amp; content != ''">content,</if>
+			<if test="attachments != null &amp;&amp; attachments != ''">attachments,</if>
+			<if test="author != null &amp;&amp; author != ''">author,</if>
+			<if test="busistate != null &amp;&amp; busistate != ''">busistate,</if>
+			<if test="state != null &amp;&amp; state != ''">state,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="reviewid != null &amp;&amp; reviewid != ''">#{reviewid},</if>
+			<if test="articleid != null &amp;&amp; articleid != ''">#{articleid},</if>
+			<if test="objectid != null &amp;&amp; objectid != ''">#{objectid},</if>
+			<if test="content != null &amp;&amp; content != ''">#{content},</if>
+			<if test="attachments != null &amp;&amp; attachments != ''">#{attachments},</if>
+			<if test="author != null &amp;&amp; author != ''">#{author},</if>
+			<if test="busistate != null &amp;&amp; busistate != ''">#{busistate},</if>
+			<if test="state != null &amp;&amp; state != ''">#{state},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="ArticleReview">
+		update scr.t_article_review 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="reviewid != null &amp;&amp; reviewid != ''">reviewid=#{reviewid},</if>
+			<if test="articleid != null &amp;&amp; articleid != ''">articleid=#{articleid},</if>
+			<if test="objectid != null &amp;&amp; objectid != ''">objectid=#{objectid},</if>
+			<if test="content != null &amp;&amp; content != ''">content=#{content},</if>
+			<if test="attachments != null &amp;&amp; attachments != ''">attachments=#{attachments},</if>
+			<if test="author != null &amp;&amp; author != ''">author=#{author},</if>
+			<if test="busistate != null &amp;&amp; busistate != ''">busistate=#{busistate},</if>
+			<if test="state != null &amp;&amp; state != ''">state=#{state},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="java.lang.String">
+		delete from scr.t_article_review <include refid="key_where"/>
+	</delete>
+	
+	<!-- 自定义操作 -->
+	<select id="findReviewsByPage" resultType="map" parameterType="QueryBean">
+		select 
+			ar.reviewid,ar.articleid,ar.objectid,ar.content,ar.attachments,ar.author,ar.modtime,ar.intime,
+			a.title,ur.nickname,ur.avatar 
+		from scr.t_article_review ar 
+			left join scr.t_article a on ar.articleid=a.articleid 
+			left join scr.t_user ur on ar.author=ur.userid 
+		where 
+			ar.articleid=#{param.articleid}  and ar.objectid=#{param.articleid} and ar.busistate=#{param.busistate} and ar.state=#{param.state} 
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	<select id="findReviewReplys" resultType="map" parameterType="map">
+		select 
+			ar.reviewid,ar.articleid,ar.objectid,ar.content,ar.attachments,ar.author,ar.modtime,ar.intime,
+			a.title,ur.nickname,ur.avatar 
+		from scr.t_article_review ar 
+			left join scr.t_article a on ar.articleid=a.articleid 
+			left join scr.t_user ur on ar.author=ur.userid 
+		where 
+			ar.articleid=#{articleid}  and ar.objectid=#{reviewid} and ar.busistate=#{busistate} and ar.state=#{state} 
+	</select>
+</mapper>

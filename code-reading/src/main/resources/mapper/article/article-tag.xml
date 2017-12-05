@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codeReading.busi.dal.iface.article.IArticleTagDao">
+	
+	<sql id="column"> atrelationid,articleid,tagid,modtime,intime </sql>
+	
+	<sql id="key_where"> where atrelationid=#{atrelationid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="RelationArticleTag" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_relation_article_tag <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="RelationArticleTag" parameterType="RelationArticleTag">
+		select <include refid="column"/> from scr.t_relation_article_tag 
+		<where>
+			<if test="atrelationid != null &amp;&amp; atrelationid != ''"> and atrelationid=#{atrelationid}</if>
+			<if test="articleid != null &amp;&amp; articleid != ''"> and articleid=#{articleid}</if>
+			<if test="tagid != null &amp;&amp; tagid != ''"> and tagid=#{tagid}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="RelationArticleTag" parameterType="RelationArticleTag">
+		select <include refid="column"/> from scr.t_relation_article_tag
+	</select>
+	
+	<select id="findByPage" resultType="RelationArticleTag" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_relation_article_tag
+		<where>
+			<if test="atrelationid != null &amp;&amp; atrelationid != ''"> and atrelationid=#{atrelationid}</if>
+			<if test="articleid != null &amp;&amp; articleid != ''"> and articleid=#{articleid}</if>
+			<if test="tagid != null &amp;&amp; tagid != ''"> and tagid=#{tagid}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="RelationArticleTag" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_relation_article_tag
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_relation_article_tag
+		<where>
+			<if test="atrelationid != null &amp;&amp; atrelationid != ''"> and atrelationid=#{atrelationid}</if>
+			<if test="articleid != null &amp;&amp; articleid != ''"> and articleid=#{articleid}</if>
+			<if test="tagid != null &amp;&amp; tagid != ''"> and tagid=#{tagid}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="RelationArticleTag">
+		insert into scr.t_relation_article_tag (
+		<trim suffixOverrides=",">
+			<if test="atrelationid != null &amp;&amp; atrelationid != ''">atrelationid,</if>
+			<if test="articleid != null &amp;&amp; articleid != ''">articleid,</if>
+			<if test="tagid != null &amp;&amp; tagid != ''">tagid,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="atrelationid != null &amp;&amp; atrelationid != ''">#{atrelationid},</if>
+			<if test="articleid != null &amp;&amp; articleid != ''">#{articleid},</if>
+			<if test="tagid != null &amp;&amp; tagid != ''">#{tagid},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="RelationArticleTag">
+		update scr.t_relation_article_tag 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="atrelationid != null &amp;&amp; atrelationid != ''">atrelationid=#{atrelationid},</if>
+			<if test="articleid != null &amp;&amp; articleid != ''">articleid=#{articleid},</if>
+			<if test="tagid != null &amp;&amp; tagid != ''">tagid=#{tagid},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="java.lang.String">
+		delete from scr.t_relation_article_tag <include refid="key_where"/>
+	</delete>
+	
+	<!-- 自定义操作 -->
+	<select id="findArticleTagByPage" resultType="RelationArticleTag" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_relation_article_tag
+		<where>
+			<if test="param.tagid != null &amp;&amp; param.tagid != ''">tagid=#{param.tagid}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	<select id="findByArticle" resultType="map" parameterType="java.lang.String">
+		select 
+			t.tagid,t.tagname,t.count,t.description, st.atrelationid, st.articleid
+		from 
+			scr.t_relation_article_tag st left join scr.t_tag t on st.tagid=t.tagid
+		where 
+			st.articleid=#{articleid}
+	</select>
+	
+	<delete id="deleteByArticleid" parameterType="java.lang.String">
+		delete from scr.t_relation_article_tag where articleid=#{articleid}
+	</delete>
+</mapper>

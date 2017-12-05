@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!--scr.t_notify 映射文件 vision:1.0.1 -->
+<mapper namespace="com.codeReading.busi.dal.iface.notify.INotifyDao">
+	
+	<sql id="column"> notifyid,type,userid,objectid,state,content,readtime,modtime,intime</sql>
+	
+	<sql id="key_where"> where notifyid=#{notifyid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="Notify" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_notify <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="Notify" parameterType="Notify">
+		select <include refid="column"/> from scr.t_notify 
+		<where>
+			<if test="notifyid != null &amp;&amp; notifyid != ''"> and notifyid=#{notifyid}</if>
+			<if test="type != null &amp;&amp; type != ''"> and type~#{type}</if>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="objectid != null &amp;&amp; objectid != ''"> and objectid=#{objectid}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="content != null &amp;&amp; content != ''"> and content=#{content}</if>
+			<if test="readtime != null"> and readtime=#{readtime}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="Notify" parameterType="Notify">
+		select <include refid="column"/> from scr.t_notify
+	</select>
+	
+	<select id="findByPage" resultType="Notify" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_notify
+		<where>
+			<if test="param.notifyid != null &amp;&amp; param.notifyid != ''"> and notifyid=#{param.notifyid}</if>
+			<if test="param.type != null &amp;&amp; param.type != ''"> and type~#{param.type}</if>
+			<if test="param.userid != null &amp;&amp; param.userid != ''"> and userid=#{param.userid}</if>
+			<if test="param.objectid != null &amp;&amp; param.objectid != ''"> and objectid=#{param.objectid}</if>
+			<if test="param.state != null &amp;&amp; param.state != ''"> and state=#{param.state}</if>
+			<if test="param.content != null &amp;&amp; param.content != ''"> and content=#{param.content}</if>
+			<if test="param.readtime != null"> and readtime=#{param.readtime}</if>
+			<if test="param.modtime != null"> and modtime=#{param.modtime}</if>
+			<if test="param.intime != null"> and intime=#{param.intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="Notify" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_notify
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_notify
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="Notify">
+		insert into scr.t_notify (
+		<trim suffixOverrides=",">
+			<if test="notifyid != null &amp;&amp; notifyid != ''">notifyid,</if>
+			<if test="type != null &amp;&amp; type != ''">type,</if>
+			<if test="userid != null &amp;&amp; userid != ''">userid,</if>
+			<if test="objectid != null &amp;&amp; objectid != ''">objectid,</if>
+			<if test="state != null &amp;&amp; state != ''">state,</if>
+			<if test="content != null &amp;&amp; content != ''">content,</if>
+			<if test="readtime != null">readtime,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="notifyid != null &amp;&amp; notifyid != ''">#{notifyid},</if>
+			<if test="type != null &amp;&amp; type != ''">#{type},</if>
+			<if test="userid != null &amp;&amp; userid != ''">#{userid},</if>
+			<if test="objectid != null &amp;&amp; objectid != ''">#{objectid},</if>
+			<if test="state != null &amp;&amp; state != ''">#{state},</if>
+			<if test="content != null &amp;&amp; content != ''">#{content},</if>
+			<if test="readtime != null">#{readtime},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="Notify">
+		update scr.t_notify 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="notifyid != null &amp;&amp; notifyid != ''">notifyid=#{notifyid},</if>
+			<if test="type != null &amp;&amp; type != ''">type=#{type},</if>
+			<if test="userid != null &amp;&amp; userid != ''">userid=#{userid},</if>
+			<if test="objectid != null &amp;&amp; objectid != ''">objectid=#{objectid},</if>
+			<if test="state != null &amp;&amp; state != ''">state=#{state},</if>
+			<if test="content != null &amp;&amp; content != ''">content=#{content},</if>
+			<if test="readtime != null">readtime=#{readtime},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="Notify">
+		delete from scr.t_notify <include refid="key_where"/>
+	</delete>
+	
+	<update id="readNotifies" parameterType="Notify">
+		update scr.t_notify set state='3', readtime=current_timestamp where state='2' and userid=#{userid}
+		<if test="notifyid != null &amp;&amp; notifyid != ''"> and notifyid=#{notifyid}</if>
+		<if test="type != null &amp;&amp; type != ''"> and type~#{type}</if>
+	</update>
+</mapper>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codeReading.busi.dal.iface.user.IUserBadgeDao">
+	
+	<sql id="column"> userbadgeid,userid,badgeid,comment,modtime,intime </sql>
+	
+	<sql id="key_where"> where userbadgeid=#{userbadgeid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="UserBadge" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_user_badge <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="UserBadge" parameterType="UserBadge">
+		select <include refid="column"/> from scr.t_user_badge 
+		<where>
+			<if test="userbadgeid != null &amp;&amp; userbadgeid != ''"> and userbadgeid=#{userbadgeid}</if>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="badgeid != null &amp;&amp; badgeid != ''"> and badgeid=#{badgeid}</if>
+			<if test="comment != null &amp;&amp; comment != ''"> and comment=#{comment}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="UserBadge" parameterType="UserBadge">
+		select <include refid="column"/> from scr.t_user_badge
+	</select>
+	
+	<select id="findByPage" resultType="UserBadge" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_user_badge
+		<where>
+			<if test="param.userbadgeid != null &amp;&amp; param.userbadgeid != ''"> and userbadgeid=#{param.userbadgeid}</if>
+			<if test="param.userid != null &amp;&amp; param.userid != ''"> and userid=#{param.userid}</if>
+			<if test="param.badgeid != null &amp;&amp; param.badgeid != ''"> and badgeid=#{param.badgeid}</if>
+			<if test="param.comment != null &amp;&amp; param.comment != ''"> and comment=#{param.comment}</if>
+			<if test="param.modtime != null"> and modtime=#{param.modtime}</if>
+			<if test="param.intime != null"> and intime=#{param.intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="UserBadge" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_user_badge
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_user_badge
+		<where>
+			<if test="userbadgeid != null &amp;&amp; userbadgeid != ''"> and userbadgeid=#{userbadgeid}</if>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="badgeid != null &amp;&amp; badgeid != ''"> and badgeid=#{badgeid}</if>
+			<if test="comment != null &amp;&amp; comment != ''"> and comment=#{comment}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="UserBadge">
+		insert into scr.t_user_badge (
+		<trim suffixOverrides=",">
+			<if test="userbadgeid != null &amp;&amp; userbadgeid != ''">userbadgeid,</if>
+			<if test="userid != null &amp;&amp; userid != ''">userid,</if>
+			<if test="badgeid != null &amp;&amp; badgeid != ''">badgeid,</if>
+			<if test="comment != null &amp;&amp; comment != ''">comment,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="userbadgeid != null &amp;&amp; userbadgeid != ''">#{userbadgeid},</if>
+			<if test="userid != null &amp;&amp; userid != ''">#{userid},</if>
+			<if test="badgeid != null &amp;&amp; badgeid != ''">#{badgeid},</if>
+			<if test="comment != null &amp;&amp; comment != ''">#{comment},</if>			
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="UserBadge">
+		update scr.t_user_badge 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="userbadgeid != null &amp;&amp; userbadgeid != ''">userbadgeid=#{userbadgeid},</if>
+			<if test="badgeid != null &amp;&amp; badgeid != ''">badgeid=#{badgeid},</if>
+			<if test="userid != null &amp;&amp; userid != ''">userid=#{userid},</if>
+			<if test="comment != null &amp;&amp; comment != ''">comment=#{comment},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 自定义操作 -->
+	<select id="findBadgesByUser" resultType="Badge" parameterType="java.lang.String">
+		select b.*
+		from scr.t_user_badge ub 
+			LEFT JOIN scr.t_badge b on ub.badgeid=b.badgeid
+		where ub.userid=#{userid} and state='1'
+	</select>
+</mapper>

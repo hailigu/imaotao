@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<validator>
+	<service id="user_1" title="发送用户注册验证码" path="user-auth/send-register-verification-code">
+		<keyinfo title="用户登录关键信息" require="true">[\\w\\u4e00-\\u9fa5]{2\,20}</keyinfo>
+		<imagecode title="图形验证码" require="true">[a-z1-9]{6}</imagecode>
+	</service>
+	
+	<service id="user_2" title="用户登录前预检查" path="user-auth/register">
+		<keyinfo title="用户登录关键信息" require="true">[\\w\\u4e00-\\u9fa5]{2\,20}</keyinfo>
+		<verificationCode title="验证码" require="true">\\d{6}</verificationCode>
+		<nickname title="用户昵称" require="true">.{2\,16}</nickname>
+		<password title="登录密码" require="true">\\w{16\,32}</password>
+	</service>
+</validator>

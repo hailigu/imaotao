@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codeReading.busi.dal.iface.info.ITagDao">
+	
+	<sql id="column"> tagid,tagname,count,description,state,inuser,modtime,intime </sql>
+	
+	<sql id="key_where"> where tagid=#{tagid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="Tag" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_tag <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="Tag" parameterType="Tag">
+		select <include refid="column"/> from scr.t_tag 
+		<where>
+			<if test="tagid != null &amp;&amp; tagid != ''"> and tagid=#{tagid}</if>
+			<if test="tagname != null &amp;&amp; tagname != ''"> and lower(tagname)=lower(#{tagname})</if>
+			<if test="count != null"> and count=#{count}</if>
+			<if test="description != null &amp;&amp; description != ''"> and description=#{description}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="inuser != null &amp;&amp; inuser != ''"> and inuser=#{inuser}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="Tag" parameterType="Tag">
+		select <include refid="column"/> from scr.t_tag
+	</select>
+	
+	<select id="findByPage" resultType="Tag" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_tag
+		<where>
+			<if test="tagid != null &amp;&amp; tagid != ''"> and tagid=#{tagid}</if>
+			<if test="tagname != null &amp;&amp; tagname != ''"> and lower(tagname)=lower(#{tagname})</if>
+			<if test="count != null"> and count=#{count}</if>
+			<if test="description != null &amp;&amp; description != ''"> and description=#{description}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="inuser != null &amp;&amp; inuser != ''"> and inuser=#{inuser}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="Tag" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_tag
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_tag
+		<where>
+			<if test="tagid != null &amp;&amp; tagid != ''"> and tagid=#{tagid}</if>
+			<if test="tagname != null &amp;&amp; tagname != ''"> and lower(tagname)=lower(#{tagname})</if>
+			<if test="count != null"> and count=#{count}</if>
+			<if test="description != null &amp;&amp; description != ''"> and description=#{description}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="inuser != null &amp;&amp; inuser != ''"> and inuser=#{inuser}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="Tag">
+		insert into scr.t_tag (
+		<trim suffixOverrides=",">
+			<if test="tagid != null &amp;&amp; tagid != ''">tagid,</if>
+			<if test="tagname != null &amp;&amp; tagname != ''">tagname,</if>
+			<if test="count != null"> count,</if>
+			<if test="description != null &amp;&amp; description != ''">description,</if>
+			<if test="state != null &amp;&amp; state != ''">state,</if>
+			<if test="inuser != null &amp;&amp; inuser != ''">inuser,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="tagid != null &amp;&amp; tagid != ''">#{tagid},</if>
+			<if test="tagname != null &amp;&amp; tagname != ''">#{tagname},</if>
+			<if test="count != null"> #{count},</if>
+			<if test="description != null &amp;&amp; description != ''">#{description},</if>
+			<if test="state != null &amp;&amp; state != ''">#{state},</if>
+			<if test="inuser != null &amp;&amp; inuser != ''">#{inuser},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="Tag">
+		update scr.t_tag 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="tagid != null &amp;&amp; tagid != ''">tagid=#{tagid},</if>
+			<if test="tagname != null &amp;&amp; tagname != ''">tagname=#{tagname},</if>
+			<if test="count != null"> count=#{count},</if>
+			<if test="description != null &amp;&amp; description != ''">description=#{description},</if>
+			<if test="state != null &amp;&amp; state != ''">state=#{state},</if>
+			<if test="inuser != null &amp;&amp; inuser != ''">inuser=#{inuser},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="java.lang.String">
+		delete from scr.t_tag <include refid="key_where"/>
+	</delete>
+	
+	<!-- 自定义操作 -->
+	<update id="addUseCount" parameterType="java.lang.String">
+	    update scr.t_tag set count=count+1 where tagid=#{tagid}
+	</update>
+	
+	<update id="decreaseUseCount" parameterType="java.lang.String">
+	    update scr.t_tag set count=count-1 where tagid=#{tagid} and count>1
+	</update>
+	
+	<select id="findWhereIn" resultType="Tag">
+		select <include refid="column"/> from scr.t_tag where tagid in 
+		<foreach collection="array" item="tagId" open="(" separator="," close=")">
+			#{tagId}
+		</foreach>
+	</select>
+	
+	<select id="findTagids" resultType="java.lang.String" parameterType="java.lang.String">
+		select tagid from scr.t_tag where lower(tagname) like lower(#{tagname})
+	</select>
+	
+	<select id="filterByTagname" resultType="Tag" parameterType="map">
+		select <include refid="column"/> from scr.t_tag 
+		where lower(tagname) ~ lower(#{tagname}) and state='2'
+		limit #{pageSize}
+	</select>
+	
+	<select id="findTagByUser" resultType="Tag" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_tag where inuser=#{inuser}
+	</select>
+</mapper>

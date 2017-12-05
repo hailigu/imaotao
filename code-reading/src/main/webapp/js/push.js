@@ -1,0 +1,1 @@
+$(function(){var img = new Image; img.src = "//api.share.baidu.com/s.gif?r="+encodeURIComponent(window.location.href);});

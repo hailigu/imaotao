@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codeReading.busi.dal.iface.user.IUserExtendDao">
+	
+	<sql id="column"> userid,password,phone,email,nickname,state,avatar,modtime,intime </sql>
+	
+	<sql id="key_where"> where userid=#{userid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="UserExtend" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_user_extend <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="UserExtend" parameterType="UserExtend">
+		select <include refid="column"/> from scr.t_user_extend 
+		<where>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="password != null &amp;&amp; password != ''"> and password=#{password}</if>
+			<if test="phone != null &amp;&amp; phone != ''"> and phone=#{phone}</if>
+			<if test="email != null &amp;&amp; email != ''"> and lower(email)=lower(#{email})</if>
+			<if test="nickname != null &amp;&amp; nickname != ''"> and nickname=#{nickname}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="avatar != null &amp;&amp; avatar != ''"> and avatar=#{avatar}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="UserExtend" parameterType="UserExtend">
+		select <include refid="column"/> from scr.t_user_extend
+	</select>
+	
+	<select id="findByPage" resultType="UserExtend" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_user_extend
+		<where>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="password != null &amp;&amp; password != ''"> and password=#{password}</if>
+			<if test="phone != null &amp;&amp; phone != ''"> and phone=#{phone}</if>
+			<if test="email != null &amp;&amp; email != ''"> and lower(email)=lower(#{email})</if>
+			<if test="nickname != null &amp;&amp; nickname != ''"> and nickname=#{nickname}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="avatar != null &amp;&amp; avatar != ''"> and avatar=#{avatar}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="UserExtend" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_user_extend
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_user_extend
+		<where>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="password != null &amp;&amp; password != ''"> and password=#{password}</if>
+			<if test="phone != null &amp;&amp; phone != ''"> and phone=#{phone}</if>
+			<if test="email != null &amp;&amp; email != ''"> and lower(email)=lower(#{email})</if>
+			<if test="nickname != null &amp;&amp; nickname != ''"> and nickname=#{nickname}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="avatar != null &amp;&amp; avatar != ''"> and avatar=#{avatar}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="UserExtend">
+		insert into scr.t_user_extend (
+		<trim suffixOverrides=",">
+			<if test="userid != null &amp;&amp; userid != ''">userid,</if>
+			<if test="password != null &amp;&amp; password != ''">password,</if>
+			<if test="phone != null &amp;&amp;phone != ''"> phone,</if>
+			<if test="email != null &amp;&amp; email != ''">email,</if>
+			<if test="nickname != null &amp;&amp; nickname != ''">nickname,</if>
+			<if test="state != null &amp;&amp; state != ''">state,</if>
+			<if test="avatar != null &amp;&amp; avatar != ''">avatar,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="userid != null &amp;&amp; userid != ''">#{userid},</if>
+			<if test="password != null &amp;&amp; password != ''">#{password},</if>
+			<if test="phone != null &amp;&amp;phone != ''"> #{phone},</if>
+			<if test="email != null &amp;&amp; email != ''">#{email},</if>
+			<if test="nickname != null &amp;&amp; nickname != ''">#{nickname},</if>
+			<if test="state != null &amp;&amp; state != ''">#{state},</if>
+			<if test="avatar != null &amp;&amp; avatar != ''">#{avatar},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="UserExtend">
+		update scr.t_user_extend 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="userid != null &amp;&amp; userid != ''">userid=#{userid},</if>
+			<if test="password != null &amp;&amp; password != ''">password=#{password},</if>
+			<if test="phone != null &amp;&amp;phone != ''"> phone=#{phone},</if>
+			<if test="email != null &amp;&amp; email != ''">email=#{email},</if>
+			<if test="nickname != null &amp;&amp; nickname != ''">nickname=#{nickname},</if>
+			<if test="state != null &amp;&amp; state != ''">state=#{state},</if>
+			<if test="avatar != null &amp;&amp; avatar != ''">avatar=#{avatar},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 自定义操作 -->
+</mapper>

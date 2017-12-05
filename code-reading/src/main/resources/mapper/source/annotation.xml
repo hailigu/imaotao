@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!--scr.t_annotation 映射文件 vision:1.0.1 -->
+<mapper namespace="com.codeReading.busi.dal.iface.source.IAnnotationDao">
+	
+	<sql id="column"> annotationid,fileid,linenum,userid,content,support,state,modtime,intime </sql>
+	
+	<sql id="key_where"> where annotationid=#{annotationid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="Annotation" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_annotation <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="Annotation" parameterType="Annotation">
+		select <include refid="column"/> from scr.t_annotation 
+		<where>
+			<if test="annotationid != null &amp;&amp; annotationid != ''"> and annotationid=#{annotationid}</if>
+			<if test="fileid != null &amp;&amp; fileid != ''"> and fileid=#{fileid}</if>
+			<if test="linenum != null"> and linenum=#{linenum}</if>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="content != null &amp;&amp; content != ''"> and content=#{content}</if>
+			<if test="support != null"> and support=#{support}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="Annotation" parameterType="Annotation">
+		select <include refid="column"/> from scr.t_annotation
+	</select>
+	
+	<select id="findByPage" resultType="Annotation" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_annotation
+		<where>
+			<if test="param.annotationid != null &amp;&amp; param.annotationid != ''"> and annotationid=#{param.annotationid}</if>
+			<if test="param.fileid != null &amp;&amp; param.fileid != ''"> and fileid=#{param.fileid}</if>
+			<if test="param.linenum != null"> and linenum=#{param.linenum}</if>
+			<if test="param.userid != null &amp;&amp; param.userid != ''"> and userid=#{param.userid}</if>
+			<if test="param.content != null &amp;&amp; param.content != ''"> and content=#{param.content}</if>
+			<if test="param.support != null"> and support=#{param.support}</if>
+			<if test="param.state != null &amp;&amp; param.state != ''"> and state=#{param.state}</if>
+			<if test="param.modtime != null"> and modtime=#{param.modtime}</if>
+			<if test="param.intime != null"> and intime=#{param.intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''"> ${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="Annotation" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_annotation
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''"> ${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_annotation
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="Annotation">
+		insert into scr.t_annotation (
+		<trim suffixOverrides=",">
+			<if test="annotationid != null &amp;&amp; annotationid != ''">annotationid,</if>
+			<if test="fileid != null &amp;&amp; fileid != ''">fileid,</if>
+			<if test="linenum != null">linenum,</if>
+			<if test="userid != null &amp;&amp; userid != ''">userid,</if>
+			<if test="content != null &amp;&amp; content != ''">content,</if>
+			<if test="support != null">support,</if>
+			<if test="state != null &amp;&amp; state != ''">state,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="annotationid != null &amp;&amp; annotationid != ''">#{annotationid},</if>
+			<if test="fileid != null &amp;&amp; fileid != ''">#{fileid},</if>
+			<if test="linenum != null">#{linenum},</if>
+			<if test="userid != null &amp;&amp; userid != ''">#{userid},</if>
+			<if test="content != null &amp;&amp; content != ''">#{content},</if>
+			<if test="support != null">#{support},</if>
+			<if test="state != null &amp;&amp; state != ''">#{state},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="Annotation">
+		update scr.t_annotation 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="annotationid != null &amp;&amp; annotationid != ''">annotationid=#{annotationid},</if>
+			<if test="fileid != null &amp;&amp; fileid != ''">fileid=#{fileid},</if>
+			<if test="linenum != null">linenum=#{linenum},</if>
+			<if test="userid != null &amp;&amp; userid != ''">userid=#{userid},</if>
+			<if test="content != null &amp;&amp; content != ''">content=#{content},</if>
+			<if test="support != null">support=#{support},</if>
+			<if test="state != null &amp;&amp; state != ''">state=#{state},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="Annotation">
+		delete from scr.t_annotation <include refid="key_where"/>
+	</delete>
+	
+	<!-- 自定义操作 -->
+	<select id="findByFileWithUserInfo" resultType="map" parameterType="java.lang.String">
+		select a.*,u.nickname,u.avatar
+		from scr.t_annotation a
+			LEFT JOIN scr.t_user u on a.userid=u.userid
+		where a.fileid=#{fileid} and a.state='2'
+		ORDER BY a.linenum ASC , a.support DESC
+	</select>
+	<select id="findByDirWithUserInfo" resultType="map" parameterType="java.lang.String">
+		select 	u.nickname,u.avatar, sf.filename,
+				an.annotationid,an.fileid,an.linenum,an.userid,an.content,an.support,an.state,an.modtime,an.intime
+		from scr.t_annotation an left join scr.t_source_file sf on an.fileid=sf.fileid
+			LEFT JOIN scr.t_user u on an.userid=u.userid
+		where sf.superpath=#{superpath} and an.state='2' and an.linenum=-1
+			<!--an.support>100; -->
+		ORDER BY sf.filename ASC , an.support DESC;
+	</select>
+
+	<!-- 自定义操作 -->
+	<select id="findByUserid" resultType="UserAnnotation" parameterType="java.lang.String">
+		select DISTINCT sp.name projectname, sf.path, sf.filename, an.linenum, an."content", an.support, to_char(an.modtime, 'YYYY-MM-DD HH:MM:SS') modtime
+		from scr.t_annotation an, scr.t_source_file sf, scr.t_source_project sp
+		where an.fileid = sf.fileid and sf."owner" = sp.projectid 
+		and an.userid = #{userid} and an.state = '2'
+		ORDER BY modtime DESC;
+	</select>	
+	
+	<update id="addSupport" parameterType="map">
+		update scr.t_annotation
+		set support=support+${supports} 
+		where annotationid=#{annotationid}
+	</update>
+	
+	<select id="findDetailByPage" resultType="map" parameterType="QueryBean">
+		select sp.name as projectname, sp.projectpath, sf.path as filepath, sf.filename, u.nickname,u.avatar,
+				an.annotationid,an.fileid,an.linenum,an.userid,an.content,an.support,an.state,an.modtime,an.intime
+		from scr.t_annotation an left join scr.t_source_file sf on an.fileid=sf.fileid
+			left join scr.t_source_project sp on sf.owner=sp.projectid
+			LEFT JOIN scr.t_user u on an.userid=u.userid
+		<where>
+			<if test="param.annotationid != null &amp;&amp; param.annotationid != ''"> and an.annotationid=#{param.annotationid}</if>
+			<if test="param.fileid != null &amp;&amp; param.fileid != ''"> and an.fileid=#{param.fileid}</if>
+			<if test="param.linenum != null"> and an.linenum=#{param.linenum}</if>
+			<if test="param.userid != null &amp;&amp; param.userid != ''"> and an.userid=#{param.userid}</if>
+			<if test="param.content != null &amp;&amp; param.content != ''"> and an.content=#{param.content}</if>
+			<if test="param.support != null"> and an.support=#{param.support}</if>
+			<if test="param.state != null &amp;&amp; param.state != ''"> and an.state=#{param.state}</if>
+			<if test="param.modtime != null"> and an.modtime=#{param.modtime}</if>
+			<if test="param.intime != null"> and an.intime=#{param.intime}</if>
+			
+			<if test="param.superpath != null &amp;&amp; param.superpath != ''"> and sp.superpath=#{param.superpath}</if>
+			<if test="param.projectid != null &amp;&amp; param.projectid != ''"> and sp.projectid=#{param.projectid}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by an.${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''"> ${page.ascend}</if>
+	</select>
+</mapper>

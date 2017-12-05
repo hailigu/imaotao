@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!--scr.t_source_file 映射文件 vision:1.0.1 -->
+<mapper namespace="com.codeReading.busi.dal.iface.source.ISourceFileDao">
+	
+	<sql id="column"> fileid,filename,path,owner,superpath,type,viewcount,state,modtime,intime </sql>
+	
+	<sql id="key_where"> where fileid=#{fileid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="SourceFile" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_source_file <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="SourceFile" parameterType="SourceFile">
+		select <include refid="column"/> from scr.t_source_file 
+		<where>
+			<if test="fileid != null &amp;&amp; fileid != ''"> and fileid=#{fileid}</if>
+			<if test="filename != null &amp;&amp; filename != ''"> and filename=#{filename}</if>
+			<if test="path != null"> and path=#{path}</if>
+			<if test="owner != null &amp;&amp; owner != ''"> and owner=#{owner}</if>
+			<if test="superpath != null &amp;&amp; superpath != ''"> and superpath=#{superpath}</if>
+			<if test="type != null &amp;&amp; type != ''"> and type=#{type}</if>
+			<if test="viewcount != null"> and viewcount=#{viewcount}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="SourceFile" parameterType="SourceFile">
+		select <include refid="column"/> from scr.t_source_file
+	</select>
+	
+	<select id="findByPage" resultType="SourceFile" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_source_file
+		<where>
+			<if test="param.fileid != null &amp;&amp; param.fileid != ''"> and fileid=#{param.fileid}</if>
+			<if test="param.filename != null &amp;&amp; param.filename != ''"> and filename=#{param.filename}</if>
+			<if test="param.path != null "> and path=#{param.path}</if>
+			<if test="param.owner != null &amp;&amp; param.owner != ''"> and owner=#{param.owner}</if>
+			<if test="param.superpath != null &amp;&amp; param.superpath != ''"> and superpath=#{param.superpath}</if>
+			<if test="param.type != null &amp;&amp; param.type != ''"> and type=#{param.type}</if>
+			<if test="param.viewcount != null"> and viewcount=#{param.viewcount}</if>
+			<if test="param.state != null &amp;&amp; param.state != ''"> and state=#{param.state}</if>
+			<if test="param.modtime != null"> and modtime=#{param.modtime}</if>
+			<if test="param.intime != null"> and intime=#{param.intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''"> ${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="SourceFile" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_source_file
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''"> ${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_source_file
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="SourceFile">
+		insert into scr.t_source_file (
+		<trim suffixOverrides=",">
+			<if test="fileid != null &amp;&amp; fileid != ''">fileid,</if>
+			<if test="filename != null &amp;&amp; filename != ''">filename,</if>
+			<if test="path != null &amp;&amp; path != ''">path,</if>
+			<if test="owner != null &amp;&amp; owner != ''">owner,</if>
+			<if test="superpath != null &amp;&amp; superpath != ''">superpath,</if>
+			<if test="type != null &amp;&amp; type != ''">type,</if>
+			<if test="viewcount != null">viewcount,</if>
+			<if test="state != null &amp;&amp; state != ''">state,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="fileid != null &amp;&amp; fileid != ''">#{fileid},</if>
+			<if test="filename != null &amp;&amp; filename != ''">#{filename},</if>
+			<if test="path != null &amp;&amp; path != ''">#{path},</if>
+			<if test="owner != null &amp;&amp; owner != ''">#{owner},</if>
+			<if test="superpath != null &amp;&amp; superpath != ''">#{superpath},</if>
+			<if test="type != null &amp;&amp; type != ''">#{type},</if>
+			<if test="viewcount != null">#{viewcount},</if>
+			<if test="state != null &amp;&amp; state != ''">#{state},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="SourceFile">
+		update scr.t_source_file 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="fileid != null &amp;&amp; fileid != ''">fileid=#{fileid},</if>
+			<if test="filename != null &amp;&amp; filename != ''">filename=#{filename},</if>
+			<if test="path != null &amp;&amp; path != ''">path=#{path},</if>
+			<if test="owner != null &amp;&amp; owner != ''">owner=#{owner},</if>
+			<if test="superpath != null &amp;&amp; superpath != ''">superpath=#{superpath},</if>
+			<if test="type != null &amp;&amp; type != ''">type=#{type},</if>
+			<if test="viewcount != null">viewcount=#{viewcount},</if>
+			<if test="state != null &amp;&amp; state != ''">state=#{state},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="SourceFile">
+		delete from scr.t_source_file <include refid="key_where"/>
+	</delete>
+	
+	<!-- 自定义操作 -->
+	
+</mapper>

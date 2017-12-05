@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>【问津】密码修改成功</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3"/>
+    <meta name="description" content="this is my page"/>
+    <meta name="content-type" content="text/html; charset=UTF-8"/>
+    
+  </head>
+  
+  <body>
+         尊敬的[{nickname}]您好， 您的{pwdtype}密码修改成功!<br/>
+  </body>
+</html>

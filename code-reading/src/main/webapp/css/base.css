@@ -1,0 +1,16 @@
+@mainWidth:'document.body.clientWidth';
+@titleColor:#f04615;
+
+#page {
+  width: @mainWidth;
+  padding: 50px;
+  margin: 0px auto;
+  
+  h3 {
+    font-size: 20px;
+    color: @titleColor;
+    background-color: #ccc;
+    padding: 10px;
+  }
+}
+

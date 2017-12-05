@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codeReading.busi.dal.iface.user.IUserContactDao">
+	
+	<sql id="column"> ucid,userid,contact,type,commonused,modtime,intime </sql>
+	
+	<sql id="key_where"> where ucid=#{ucid} </sql>
+	<sql id="userid_where"> where userid=#{userid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="UserContact" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_user_contact <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="UserContact" parameterType="UserContact">
+		select <include refid="column"/> from scr.t_user_contact 
+		<where>
+			<if test="ucid != null &amp;&amp; ucid != ''"> and ucid=#{ucid}</if>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="contact != null &amp;&amp; contact != ''"> and contact=#{contact}</if>
+			<if test="type != null &amp;&amp; type != ''"> and lower(type)=lower(#{type})</if>
+			<if test="commonused != null"> and commonused=#{commonused}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="UserContact" parameterType="UserContact">
+		select <include refid="column"/> from scr.t_user_contact
+	</select>
+	
+	<select id="findByPage" resultType="UserContact" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_user_contact
+		<where>
+			<if test="ucid != null &amp;&amp; ucid != ''"> and ucid=#{ucid}</if>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="contact != null &amp;&amp; contact != ''"> and contact=#{contact}</if>
+			<if test="type != null &amp;&amp; type != ''"> and lower(type)=lower(#{type})</if>
+			<if test="commonused != null"> and commonused=#{commonused}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="UserContact" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_user_contact
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_user_contact
+		<where>
+			<if test="ucid != null &amp;&amp; ucid != ''"> and ucid=#{ucid}</if>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="contact != null &amp;&amp; contact != ''"> and contact=#{contact}</if>
+			<if test="type != null &amp;&amp; type != ''"> and lower(type)=lower(#{type})</if>
+			<if test="commonused != null"> and commonused=#{commonused}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="UserContact">
+		insert into scr.t_user_contact (
+		<trim suffixOverrides=",">
+			<if test="ucid != null &amp;&amp; ucid != ''">ucid,</if>
+			<if test="userid != null &amp;&amp; userid != ''">userid,</if>
+			<if test="contact != null &amp;&amp;contact != ''"> contact,</if>
+			<if test="type != null &amp;&amp; type != ''">type,</if>
+			<if test="commonused != null">commonused,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="ucid != null &amp;&amp; ucid != ''">#{ucid},</if>
+			<if test="userid != null &amp;&amp; userid != ''">#{userid},</if>
+			<if test="contact != null &amp;&amp;contact != ''"> #{contact},</if>
+			<if test="type != null &amp;&amp; type != ''">#{type},</if>
+			<if test="commonused != null">#{commonused},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="UserContact">
+		update scr.t_user_contact 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="ucid != null &amp;&amp; ucid != ''">ucid=#{ucid},</if>
+			<if test="userid != null &amp;&amp; userid != ''">userid=#{userid},</if>
+			<if test="contact != null &amp;&amp;contact != ''"> contact=#{contact},</if>
+			<if test="type != null &amp;&amp; type != ''">type=#{type},</if>
+			<if test="commonused != null">commonused=#{commonused},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="java.lang.String">
+		delete from scr.t_user_contact <include refid="key_where"/>
+	</delete>
+	
+	<!-- 自定义操作 -->
+	<select id="getByUserid" resultType="UserContact" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_user_contact <include refid="userid_where" />
+	</select>
+	<delete id="deleteByUserid" parameterType="java.lang.String">
+		delete from scr.t_user_contact <include refid="userid_where"/>
+	</delete>
+</mapper>

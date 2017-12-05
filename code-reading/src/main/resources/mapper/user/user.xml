@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codeReading.busi.dal.iface.user.IUserDao">
+	
+	<sql id="column"> userid,password,phone,email,nickname,state,avatar,modtime,intime </sql>
+	
+	<sql id="key_where"> where userid=#{userid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="User" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_user <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="User" parameterType="User">
+		select <include refid="column"/> from scr.t_user 
+		<where>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="password != null &amp;&amp; password != ''"> and password=#{password}</if>
+			<if test="phone != null &amp;&amp; phone != ''"> and phone=#{phone}</if>
+			<if test="email != null &amp;&amp; email != ''"> and lower(email)=lower(#{email})</if>
+			<if test="nickname != null &amp;&amp; nickname != ''"> and nickname=#{nickname}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="avatar != null &amp;&amp; avatar != ''"> and avatar=#{avatar}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="User" parameterType="User">
+		select <include refid="column"/> from scr.t_user
+	</select>
+	
+	<select id="findByPage" resultType="User" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_user
+		<where>
+			<if test="param.userid != null &amp;&amp; param.userid != ''"> and userid=#{param.userid}</if>
+			<if test="param.password != null &amp;&amp; param.password != ''"> and password=#{param.password}</if>
+			<if test="param.phone != null &amp;&amp; param.phone != ''"> and phone=#{param.phone}</if>
+			<if test="param.email != null &amp;&amp; param.email != ''"> and lower(email)=lower(#{param.email})</if>
+			<if test="param.nickname != null &amp;&amp; param.nickname != ''"> and nickname=#{param.nickname}</if>
+			<if test="param.state != null &amp;&amp; param.state != ''"> and state=#{param.state}</if>
+			<if test="param.avatar != null &amp;&amp; param.avatar != ''"> and avatar=#{param.avatar}</if>
+			<if test="param.modtime != null"> and modtime=#{param.modtime}</if>
+			<if test="param.intime != null"> and intime=#{param.intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="User" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_user
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''">${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_user
+		<where>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="password != null &amp;&amp; password != ''"> and password=#{password}</if>
+			<if test="phone != null &amp;&amp; phone != ''"> and phone=#{phone}</if>
+			<if test="email != null &amp;&amp; email != ''"> and lower(email)=lower(#{email})</if>
+			<if test="nickname != null &amp;&amp; nickname != ''"> and nickname=#{nickname}</if>
+			<if test="state != null &amp;&amp; state != ''"> and state=#{state}</if>
+			<if test="avatar != null &amp;&amp; avatar != ''"> and avatar=#{avatar}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="User">
+		insert into scr.t_user (
+		<trim suffixOverrides=",">
+			<if test="userid != null &amp;&amp; userid != ''">userid,</if>
+			<if test="password != null &amp;&amp; password != ''">password,</if>
+			<if test="phone != null &amp;&amp;phone != ''"> phone,</if>
+			<if test="email != null &amp;&amp; email != ''">email,</if>
+			<if test="nickname != null &amp;&amp; nickname != ''">nickname,</if>
+			<if test="state != null &amp;&amp; state != ''">state,</if>
+			<if test="avatar != null &amp;&amp; avatar != ''">avatar,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="userid != null &amp;&amp; userid != ''">#{userid},</if>
+			<if test="password != null &amp;&amp; password != ''">#{password},</if>
+			<if test="phone != null &amp;&amp;phone != ''"> #{phone},</if>
+			<if test="email != null &amp;&amp; email != ''">#{email},</if>
+			<if test="nickname != null &amp;&amp; nickname != ''">#{nickname},</if>
+			<if test="state != null &amp;&amp; state != ''">#{state},</if>
+			<if test="avatar != null &amp;&amp; avatar != ''">#{avatar},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="User">
+		update scr.t_user 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="userid != null &amp;&amp; userid != ''">userid=#{userid},</if>
+			<if test="password != null &amp;&amp; password != ''">password=#{password},</if>
+			<if test="phone != null &amp;&amp;phone != ''"> phone=#{phone},</if>
+			<if test="email != null &amp;&amp; email != ''">email=#{email},</if>
+			<if test="nickname != null &amp;&amp; nickname != ''">nickname=#{nickname},</if>
+			<if test="state != null &amp;&amp; state != ''">state=#{state},</if>
+			<if test="avatar != null &amp;&amp; avatar != ''">avatar=#{avatar},</if>
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 自定义操作 -->
+	<select id="getUserBindInfo" parameterType="string" resultType="map">
+		select userid, nickname, phone, email, state from scr.t_user where userid=#{userid}
+	</select>
+
+	<update id="modifyPassword" parameterType="map">
+		update scr.t_user set password=#{password} where userid=#{userid}
+	</update>
+	
+	<select id="getUserCoreInfo" parameterType="string" resultType="map">
+		select userid, nickname, password, phone, email, state from scr.t_user where userid=#{keyinfo} or phone=#{keyinfo} or email=#{keyinfo}
+	</select>
+	
+	<select id="getByUserKeyinfo" parameterType="string" resultType="User">
+	    select <include refid="column"/> from scr.t_user where userid=#{keyinfo} or phone=#{keyinfo} or email=#{keyinfo}
+	</select>
+	
+	<select id="existNickname" resultType="boolean">
+		select exists(select 1 from scr.t_user where lower(nickname)=#{nickname})
+	</select>
+</mapper>

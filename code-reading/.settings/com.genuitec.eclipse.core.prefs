@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+validator.Checked=src/main/resources/logback.xml,src/main/webapp/WEB-INF/jsp/base/common.jsp,src/main/webapp/js/ueditor,src/main/webapp/js/lib,src/main/java/com/codeReading/core/opengrok/index/opengrok.xml,src/main/resources/validations,src/main/resources/ueditor-config.json,src/main/webapp/js/editor.md,src/main/java/org/opensolaris/opengrok/index/opengrok.xml
+validator.Unchecked=

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!--scr.t_support 映射文件 vision:1.0.1 -->
+<mapper namespace="com.codeReading.busi.dal.iface.source.ISupportDao">
+	
+	<sql id="column"> supportid,userid,targetid,targettype,orientation,intime </sql>
+	
+	<sql id="key_where"> where supportid=#{supportid} </sql>
+	
+	<sql id="targetkey_where"> where targetid=#{targetid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="Support" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_support <include refid="key_where" />
+	</select>
+	
+	<select id="getByUserAndTarget" resultType="Support" parameterType="map">
+		select <include refid="column"/> from scr.t_support
+		where userid=#{userid} and targetid=#{targetid}
+	</select>
+	
+	<select id="find" resultType="Support" parameterType="Support">
+		select <include refid="column"/> from scr.t_support 
+		<where>
+			<if test="supportid != null &amp;&amp; supportid != ''"> and supportid=#{supportid}</if>
+			<if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="targetid != null &amp;&amp; targetid != ''"> and targetid=#{targetid}</if>
+			<if test="targettype != null &amp;&amp; targettype != ''"> and targettype=#{targettype}</if>
+			<if test="orientation != null"> and orientation=#{orientation}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultType="Support" parameterType="Support">
+		select <include refid="column"/> from scr.t_support
+	</select>
+	
+	<select id="findByPage" resultType="Support" parameterType="QueryBean">
+		select <include refid="column"/> from scr.t_support
+		<where>
+			<if test="param.supportid != null &amp;&amp; param.supportid != ''"> and supportid=#{param.supportid}</if>
+			<if test="param.userid != null &amp;&amp; param.userid != ''"> and userid=#{param.userid}</if>
+			<if test="param.targetid != null &amp;&amp; param.targetid != ''"> and targetid=#{param.targetid}</if>
+			<if test="param.targettype != null &amp;&amp; param.targettype != ''"> and targettype=#{param.targettype}</if>
+			<if test="param.orientation != null"> and orientation=#{param.orientation}</if>
+			<if test="param.intime != null"> and intime=#{param.intime}</if>
+		</where>
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''"> ${page.ascend}</if>
+	</select>
+	
+	<select id="findAllByPage" resultType="Support" parameterType="PageBean">
+		select <include refid="column"/> from scr.t_support
+		<if test="page.orderKey != null &amp;&amp; page.orderKey != ''"> order by ${page.orderKey}</if>
+		<if test="page.ascend != null &amp;&amp; page.ascend != ''"> ${page.ascend}</if>
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(1) from scr.t_support
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="Support">
+		insert into scr.t_support (
+		<trim suffixOverrides=",">
+			<if test="supportid != null &amp;&amp; supportid != ''">supportid,</if>
+			<if test="userid != null &amp;&amp; userid != ''">userid,</if>
+			<if test="targetid != null &amp;&amp; targetid != ''">targetid,</if>
+			<if test="targettype != null &amp;&amp; targettype != ''">targettype,</if>
+			<if test="orientation != null">orientation,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="supportid != null &amp;&amp; supportid != ''">#{supportid},</if>
+			<if test="userid != null &amp;&amp; userid != ''">#{userid},</if>
+			<if test="targetid != null &amp;&amp; targetid != ''">#{targetid},</if>
+			<if test="targettype != null &amp;&amp; targettype != ''">#{targettype},</if>
+			<if test="orientation != null">#{orientation},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="Support">
+		update scr.t_support 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="supportid != null &amp;&amp; supportid != ''">supportid=#{supportid},</if>
+			<if test="userid != null &amp;&amp; userid != ''">userid=#{userid},</if>
+			<if test="targetid != null &amp;&amp; targetid != ''">targetid=#{targetid},</if>
+			<if test="targettype != null &amp;&amp; targettype != ''">targettype=#{targettype},</if>
+			<if test="orientation != null">orientation=#{orientation},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="Support">
+		delete from scr.t_support <include refid="key_where"/>
+	</delete>
+	
+	<!-- 自定义操作 -->
+	
+</mapper>

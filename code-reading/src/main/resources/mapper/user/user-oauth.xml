@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codeReading.busi.dal.iface.user.IUserOAuthDao">
+	
+	<sql id="column"> oid,userid,oauthtype,oauthid,modtime,intime </sql>
+	
+	<sql id="key_where"> where oid=#{oid} </sql>
+
+	<!-- 查询 -->
+	<select id="get" resultType="UserOAuth" parameterType="java.lang.String">
+		select <include refid="column"/> from scr.t_user_oauth <include refid="key_where" />
+	</select>
+	
+	<select id="find" resultType="UserOAuth" parameterType="UserOAuth">
+		select <include refid="column"/> from scr.t_user_oauth 
+		<where>
+			<if test="oid != null &amp;&amp; oid != ''"> and oid=#{oid}</if>
+		    <if test="userid != null &amp;&amp; userid != ''"> and userid=#{userid}</if>
+			<if test="oauthtype != null &amp;&amp; oauthtype != ''"> and oauthtype=#{oauthtype}</if>
+		    <if test="oauthid != null &amp;&amp; oauthid != ''"> and oauthid=#{oauthid}</if>
+			<if test="modtime != null"> and modtime=#{modtime}</if>
+			<if test="intime != null"> and intime=#{intime}</if>
+		</where>
+	</select>
+	
+	<select id="getByOAuthTypeAndOAuthId" resultType="UserOAuth" parameterType="map">
+		select <include refid="column"/> from scr.t_user_oauth
+		<where>
+			<if test="oauthtype != null &amp;&amp; oauthtype != ''"> and oauthtype=#{oauthtype}</if>
+		    <if test="oauthid != null &amp;&amp; oauthid != ''"> and oauthid=#{oauthid}</if>
+		</where>
+	</select>
+		
+	
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="UserOAuth">
+		insert into scr.t_user_oauth (
+		<trim suffixOverrides=",">
+			<if test="oid != null &amp;&amp; oid != ''">oid,</if>
+			<if test="userid != null &amp;&amp; userid != ''">userid,</if>
+			<if test="oauthtype != null &amp;&amp; oauthtype != ''">oauthtype,</if>
+			<if test="oauthid != null &amp;&amp; oauthid != ''">oauthid,</if>
+			<if test="modtime != null">modtime,</if>
+			<if test="intime != null">intime,</if>
+		</trim>
+		) values (
+		<trim suffixOverrides=",">
+			<if test="oid != null &amp;&amp; oid != ''">#{oid},</if>
+			<if test="userid != null &amp;&amp; userid != ''">#{userid},</if>
+			<if test="oauthtype != null &amp;&amp; oauthtype != ''">#{oauthtype},</if>
+			<if test="oauthid != null &amp;&amp; oauthid != ''">#{oauthid},</if>
+			<if test="modtime != null">#{modtime},</if>
+			<if test="intime != null">#{intime},</if>
+		</trim>
+		)
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="UserOAuth">
+		update scr.t_user_oauth 
+		<trim prefix=" set " suffixOverrides=",">
+			<if test="oid != null &amp;&amp; oid != ''">oid=#{oid},</if>
+			<if test="userid != null &amp;&amp; userid != ''">userid=#{userid},</if>
+			<if test="oauthtype != null &amp;&amp; oauthtype != ''">oauthtype=#{oauthtype},</if>
+			<if test="oauthid != null &amp;&amp; oauthid != ''">oauthid=#{oauthid},</if>s
+			<if test="modtime != null">modtime=#{modtime},</if>
+			<if test="intime != null">intime=#{intime},</if>
+		</trim>
+		<include refid="key_where" />
+	</update>
+	
+</mapper>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--通用数据库访问，主要用户时间获取、存储过程/方法访问等操作 -->
+<mapper namespace="com.codeReading.core.framework.db.ICommonDao">
+	<select id="current_timestamp" resultType="java.sql.Timestamp">
+		select current_timestamp
+	</select>
+</mapper>
